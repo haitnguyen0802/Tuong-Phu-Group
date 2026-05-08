@@ -1,0 +1,115 @@
+import type { Product } from "@/types";
+
+export const bestSellers: Product[] = [
+  {
+    id: "p-lotus-mist",
+    slug: "lotus-mist",
+    name: "Tinh chất xịt sen Hậu Giang",
+    shortDescription: "Cấp ẩm tức thì, làm dịu da kích ứng",
+    category: "Skincare",
+    price: 285000,
+    comparePrice: 320000,
+    stock: 18,
+    badges: ["bestseller", "new"],
+    frontImage: {
+      src: "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=900&q=80",
+      alt: "Chai xịt khoáng hồng nhạt",
+    },
+    backImage: {
+      src: "https://images.unsplash.com/photo-1556228852-80b6e5eeff06?auto=format&fit=crop&w=900&q=80",
+      alt: "Mặt sau chai xịt khoáng hồng",
+    },
+  },
+  {
+    id: "p-winter-melon-cleanser",
+    slug: "winter-melon-cleanser",
+    name: "Sữa rửa mặt bí đao",
+    shortDescription: "Sạch sâu cho da dầu mụn, không gây khô căng",
+    category: "Skincare",
+    price: 199000,
+    stock: 32,
+    badges: ["bestseller"],
+    frontImage: {
+      src: "https://images.unsplash.com/photo-1571781926291-c477ebfd024b?auto=format&fit=crop&w=900&q=80",
+      alt: "Tuýp sữa rửa mặt bí đao xanh nhạt",
+    },
+    backImage: {
+      src: "https://images.unsplash.com/photo-1599751449128-eb7249c3d6b1?auto=format&fit=crop&w=900&q=80",
+      alt: "Hình bí đao tươi cạnh tuýp sữa rửa mặt",
+    },
+  },
+  {
+    id: "p-coffee-scrub",
+    slug: "coffee-scrub",
+    name: "Tẩy da chết cà phê Buôn Mê",
+    shortDescription: "Lấy đi tế bào chết, dưỡng da mịn mượt",
+    category: "Body",
+    price: 245000,
+    comparePrice: 275000,
+    stock: 7,
+    badges: ["limited", "low-stock"],
+    frontImage: {
+      src: "https://images.unsplash.com/photo-1583248369069-9d91f1640fe6?auto=format&fit=crop&w=900&q=80",
+      alt: "Hộp tẩy da chết cà phê",
+    },
+    backImage: {
+      src: "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=900&q=80",
+      alt: "Hạt cà phê rang nâu sẫm",
+    },
+  },
+  {
+    id: "p-palm-sugar-shower",
+    slug: "palm-sugar-shower",
+    name: "Gel tắm đường thốt nốt An Giang",
+    shortDescription: "Hương ngọt ấm, dưỡng da mềm mượt như lụa",
+    category: "Body",
+    price: 215000,
+    stock: 24,
+    badges: ["new"],
+    frontImage: {
+      src: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=900&q=80",
+      alt: "Chai gel tắm xanh nhạt cạnh hoa cỏ",
+    },
+    backImage: {
+      src: "https://images.unsplash.com/photo-1604004215854-3a4ec7d4a1d5?auto=format&fit=crop&w=900&q=80",
+      alt: "Tinh thể đường thốt nốt vàng nâu",
+    },
+  },
+  {
+    id: "p-pomelo-shampoo",
+    slug: "pomelo-shampoo",
+    name: "Dầu gội vỏ bưởi Diễn",
+    shortDescription: "Giảm gãy rụng, tóc bóng khoẻ tự nhiên",
+    category: "Hair",
+    price: 235000,
+    stock: 41,
+    badges: ["bestseller"],
+    frontImage: {
+      src: "https://images.unsplash.com/photo-1571781565036-d3f759be73e4?auto=format&fit=crop&w=900&q=80",
+      alt: "Chai dầu gội vàng nhẹ trong suốt",
+    },
+    backImage: {
+      src: "https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=900&q=80",
+      alt: "Quả bưởi cắt đôi cạnh chai dầu gội",
+    },
+  },
+  {
+    id: "p-turmeric-mask",
+    slug: "turmeric-mask",
+    name: "Mặt nạ ngủ nghệ Hưng Yên",
+    shortDescription: "Phục hồi qua đêm, mờ thâm sau mụn",
+    category: "Skincare",
+    price: 329000,
+    comparePrice: 369000,
+    stock: 12,
+    badges: ["bestseller", "low-stock"],
+    frontImage: {
+      src: "https://images.unsplash.com/photo-1620916297897-1b0c8a2bd7e8?auto=format&fit=crop&w=900&q=80",
+      alt: "Hũ mặt nạ ngủ nghệ vàng",
+    },
+    backImage: {
+      src: "https://images.unsplash.com/photo-1593326969770-c4d4ff84c95e?auto=format&fit=crop&w=900&q=80",
+      alt: "Bột nghệ vàng tươi rải trên nền gỗ",
+    },
+  },
+];
