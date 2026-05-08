@@ -1,0 +1,178 @@
+@import "tailwindcss";
+
+/* -------------------------------------------------------------------------- */
+/* Tường Phú Group design tokens                                              */
+/* -------------------------------------------------------------------------- */
+@theme {
+  /* Brand palette ---------------------------------------------------------- */
+  --color-cream-50: #fbf8f2;
+  --color-cream-100: #f4ecdb;
+  --color-cream-200: #ebdfc6;
+  --color-cream-300: #ddcca7;
+
+  --color-moss-50: #eef2ec;
+  --color-moss-100: #d6e0d2;
+  --color-moss-200: #a9bda1;
+  --color-moss-400: #5d7a52;
+  --color-moss-600: #3b5732;
+  --color-moss-700: #2f4a3c;
+  --color-moss-800: #1f3327;
+  --color-moss-900: #11201a;
+
+  --color-clay-300: #e7a587;
+  --color-clay-500: #c46a4f;
+  --color-clay-600: #a4533c;
+
+  --color-ochre-300: #e3c789;
+  --color-ochre-500: #c8a45c;
+  --color-ochre-600: #a78544;
+
+  --color-ink-900: #1f2422;
+  --color-ink-700: #353b38;
+  --color-ink-500: #6b6f6a;
+  --color-ink-300: #b3b6b1;
+
+  --color-line-100: #efe7d6;
+  --color-line-200: #e5dccc;
+
+  /* Semantic alias --------------------------------------------------------- */
+  --color-background: var(--color-cream-50);
+  --color-foreground: var(--color-ink-900);
+  --color-muted: var(--color-ink-500);
+  --color-border: var(--color-line-200);
+  --color-primary: var(--color-moss-700);
+  --color-primary-foreground: var(--color-cream-50);
+  --color-accent: var(--color-clay-500);
+  --color-accent-foreground: var(--color-cream-50);
+
+  /* Typography ------------------------------------------------------------- */
+  --font-sans: var(--font-sans);
+  --font-display: var(--font-display);
+
+  --text-eyebrow: 0.75rem;
+  --tracking-eyebrow: 0.18em;
+
+  /* Layout ----------------------------------------------------------------- */
+  --container-content: 80rem; /* 1280px */
+  --container-wide: 90rem; /* 1440px */
+  --radius-button: 9999px;
+  --radius-card: 1.25rem;
+
+  /* Motion ----------------------------------------------------------------- */
+  --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-base: 320ms;
+}
+
+/* Base ---------------------------------------------------------------------- */
+@layer base {
+  html {
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    color-scheme: light;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+    font-feature-settings:
+      "ss01" on,
+      "cv11" on;
+  }
+
+  ::selection {
+    background-color: var(--color-moss-700);
+    color: var(--color-cream-50);
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display), ui-serif, Georgia, serif;
+    letter-spacing: -0.01em;
+  }
+
+  /* Reduced motion fallback for any animation we author */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* Utility ------------------------------------------------------------------- */
+@layer utilities {
+  .eyebrow {
+    font-size: var(--text-eyebrow);
+    letter-spacing: var(--tracking-eyebrow);
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  /* Overlay / drawer keyframes ------------------------------------------- */
+  /* Used by Radix Dialog states: data-[state=open] / data-[state=closed]. */
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes fade-out {
+    from { opacity: 1; }
+    to   { opacity: 0; }
+  }
+  @keyframes slide-in-right {
+    from { transform: translateX(100%); }
+    to   { transform: translateX(0); }
+  }
+  @keyframes slide-out-right {
+    from { transform: translateX(0); }
+    to   { transform: translateX(100%); }
+  }
+  @keyframes scale-in {
+    from { opacity: 0; transform: translate(-50%, -48%) scale(0.96); }
+    to   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  }
+  @keyframes scale-out {
+    from { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    to   { opacity: 0; transform: translate(-50%, -48%) scale(0.98); }
+  }
+
+  /* Hero pagination progress fill. Restarted via `key` reset on every snap. */
+  @keyframes hero-progress {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+
+  /* Reduced-motion: collapse drawer/overlay keyframes to instant. */
+  @media (prefers-reduced-motion: reduce) {
+    @keyframes slide-in-right {
+      from { transform: none; }
+      to   { transform: none; }
+    }
+    @keyframes slide-out-right {
+      from { transform: none; }
+      to   { transform: none; }
+    }
+    @keyframes scale-in {
+      from { opacity: 0; transform: translate(-50%, -50%); }
+      to   { opacity: 1; transform: translate(-50%, -50%); }
+    }
+    @keyframes scale-out {
+      from { opacity: 1; transform: translate(-50%, -50%); }
+      to   { opacity: 0; transform: translate(-50%, -50%); }
+    }
+  }
+}
