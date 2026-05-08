@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { CheckoutPageClient } from "@/components/checkout/CheckoutPageClient";
 
 export const metadata: Metadata = {
-  title: "Checkout",
-  description: "Hoan tat thong tin de tao don hang mock an toan.",
+  title: "Yêu cầu báo giá",
+  description:
+    "Gửi yêu cầu báo giá OOH tới Tường Phú Group — phản hồi chi tiết trong vòng 24h.",
   alternates: {
     canonical: "/checkout",
   },

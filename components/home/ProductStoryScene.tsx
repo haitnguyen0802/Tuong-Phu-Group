@@ -1,9 +1,9 @@
-﻿"use client";
+"use client";
 
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { Leaf, Sparkles, ShieldCheck } from "lucide-react";
+import { Activity, MapPinned, ShieldCheck } from "lucide-react";
 import { useReducedMotion } from "motion/react";
 import { ingredients } from "@/data/ingredients";
 import { bestSellers } from "@/data/products";
@@ -17,19 +17,19 @@ import type { Ingredient, Product } from "@/types";
 
 const STORY_POINTS = [
   {
-    icon: Leaf,
-    label: "Thu hoach som",
-    text: "Sen duoc chon trong khung gio mat nhat de giu huong va hoat chat tu nhien.",
+    icon: MapPinned,
+    label: "Khao sat thuc dia",
+    text: "Doi khao sat do luu luong, hanh vi nhin va moi truong xung quanh truoc khi chot vi tri.",
   },
   {
-    icon: Sparkles,
-    label: "Chiet xuat nhanh 6 gio",
-    text: "Rut ngan thoi gian xu ly de giu polyphenol giup lam diu va ho tro phuc hoi da.",
+    icon: Activity,
+    label: "Bao cao do luong",
+    text: "Bao cao dinh ky ve reach, frequency va CPM giup khach hang danh gia hieu qua tung thang.",
   },
   {
     icon: ShieldCheck,
-    label: "Cong thuc toi gian",
-    text: "Giam thanh phan du thua, tap trung hieu qua va do an toan cho da nhay cam.",
+    label: "Van hanh ky luat",
+    text: "Quy trinh thi cong, kiem tra va bao tri theo tieu chuan ISO 9001, khong tre campaign.",
   },
 ] as const;
 
@@ -47,14 +47,13 @@ export function ProductStoryScene({
 
   const sceneRef = React.useRef<HTMLElement | null>(null);
   const bgLayerRef = React.useRef<HTMLDivElement | null>(null);
-  const ingredientLayerRef = React.useRef<HTMLDivElement | null>(null);
+  const accentLayerRef = React.useRef<HTMLDivElement | null>(null);
   const productLayerRef = React.useRef<HTMLDivElement | null>(null);
   const textLayerRef = React.useRef<HTMLDivElement | null>(null);
 
-  const lotus =
-    ingredientItems.find((item) => item.id === "lotus") ?? ingredientItems[0];
-  const lotusProduct =
-    productItems.find((item) => item.slug === "lotus-mist") ?? productItems[0];
+  const featuredFormat = ingredientItems[0];
+  const featuredProduct =
+    productItems.find((item) => item.slug === "led-q1-saigon") ?? productItems[0];
 
   React.useEffect(() => {
     if (reduce || lowEnd) return;
@@ -79,9 +78,9 @@ export function ProductStoryScene({
           timeline.fromTo(bgLayerRef.current, { yPercent: -6 }, { yPercent: 5 }, 0);
         }
 
-        if (ingredientLayerRef.current) {
+        if (accentLayerRef.current) {
           timeline.fromTo(
-            ingredientLayerRef.current,
+            accentLayerRef.current,
             { yPercent: -10, rotation: -2 },
             { yPercent: 10, rotation: 2 },
             0,
@@ -116,7 +115,7 @@ export function ProductStoryScene({
   return (
     <section
       ref={sceneRef}
-      aria-label="Cau chuyen san pham chu luc"
+      aria-label="Vi tri OOH chu luc"
       className="relative isolate overflow-hidden py-20 sm:py-24 lg:py-28"
     >
       <div
@@ -132,7 +131,7 @@ export function ProductStoryScene({
         <div className="grid gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-14">
           <div className="relative overflow-hidden rounded-[2rem] border border-line-100 bg-cream-100/65 p-3 sm:p-4 lg:p-6">
             <div
-              ref={ingredientLayerRef}
+              ref={accentLayerRef}
               aria-hidden
               className="pointer-events-none absolute -left-10 -top-14 h-52 w-52 rounded-full bg-clay-300/40 blur-3xl"
             />
@@ -141,8 +140,8 @@ export function ProductStoryScene({
               className="relative aspect-[4/5] overflow-hidden rounded-[1.5rem] border border-cream-50/70"
             >
               <Image
-                src={lotusProduct.frontImage.src}
-                alt={lotusProduct.frontImage.alt}
+                src={featuredProduct.frontImage.src}
+                alt={featuredProduct.frontImage.alt}
                 fill
                 sizes="(min-width: 1024px) 44vw, (min-width: 768px) 60vw, 100vw"
                 className="object-cover"
@@ -153,20 +152,20 @@ export function ProductStoryScene({
               />
             </div>
             <p className="mt-4 text-sm leading-relaxed text-ink-700 sm:mt-5 sm:text-base">
-              {lotus.description}
+              {featuredFormat.description}
             </p>
           </div>
 
           <div ref={textLayerRef} className="space-y-8">
             <FadeIn className="space-y-5" y={20}>
-              <p className="eyebrow text-moss-700">Product story scene</p>
+              <p className="eyebrow text-moss-700">Vi tri noi bat</p>
               <h2 className="text-balance font-display text-4xl leading-[1.05] text-ink-900 sm:text-5xl lg:text-6xl">
-                {lotus.name}
-                <span className="block text-clay-500">trong tung lan suong phuc hoi</span>
+                {featuredProduct.name}
+                <span className="block text-clay-500">diem cham 24/7 ngay trung tam thanh pho</span>
               </h2>
               <p className="max-w-xl text-pretty text-base leading-relaxed text-ink-600 sm:text-lg">
-                Tu vung trong giau phu sa cua {lotus.region}, Verdara phat trien mot hanh trinh cham da
-                toi gian: lam diu nhanh, khoa am nhe, va giu cam giac tuoi mat suot ngay.
+                Mang luoi {featuredFormat.name.toLowerCase()} tai {featuredFormat.region} - dominant
+                visual cho moi campaign launching, ket hop voi data do luong luu luong theo tuan.
               </p>
             </FadeIn>
 
@@ -190,18 +189,18 @@ export function ProductStoryScene({
 
             <FadeIn delay={0.18} className="flex flex-wrap items-center gap-3" y={16}>
               <Link
-                href={`/products/${lotusProduct.slug}`}
+                href={`/products/${featuredProduct.slug}`}
                 className={buttonStyles({ variant: "primary", size: "lg" })}
-                aria-label={`Kham pha ${lotusProduct.name}`}
+                aria-label={`Xem chi tiet vi tri ${featuredProduct.name}`}
               >
-                Kham pha {lotusProduct.name}
+                Xem chi tiet vi tri
               </Link>
               <Link
-                href="/ingredients/lotus"
+                href={`/ingredients/${featuredFormat.id}`}
                 className={buttonStyles({ variant: "outline", size: "lg" })}
-                aria-label="Xem hanh trinh nguyen lieu sen Hau Giang"
+                aria-label={`Tim hieu loai hinh ${featuredFormat.name}`}
               >
-                Hanh trinh nguyen lieu
+                Tim hieu loai hinh
               </Link>
             </FadeIn>
           </div>

@@ -19,7 +19,7 @@ export async function generateMetadata({
 
   if (!detail) {
     return {
-      title: "Product not found",
+      title: "Vị trí không tồn tại",
     };
   }
 
@@ -43,18 +43,21 @@ export default async function ProductDetailPage({ params }: ProductDetailPagePro
     <section className="py-16 sm:py-20">
       <Container size="wide" className="space-y-8">
         <nav className="text-sm text-ink-500">
-          <Link href="/">Home</Link> / <Link href="/products">Products</Link> /{" "}
+          <Link href="/">Trang chủ</Link> / <Link href="/products">Vị trí OOH</Link> /{" "}
           <span className="text-ink-700">{detail.product.name}</span>
         </nav>
 
         <div className="grid gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
           <ProductGallery product={detail.product} />
-          <ProductInfo product={detail.product} ingredientSummary={detail.ingredientSummary} />
+          <ProductInfo
+            product={detail.product}
+            ingredientSummary={detail.ingredientSummary}
+          />
         </div>
 
         {detail.related.length ? (
           <div className="space-y-4">
-            <h2 className="font-display text-3xl text-ink-900">San pham lien quan</h2>
+            <h2 className="font-display text-3xl text-ink-900">Vị trí liên quan</h2>
             <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
               {detail.related.map((item) => (
                 <ProductCard key={item.id} product={item} />

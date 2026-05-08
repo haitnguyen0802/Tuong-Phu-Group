@@ -127,7 +127,7 @@ export function SearchOverlay() {
               autoComplete="off"
               spellCheck={false}
               enterKeyHint="search"
-              placeholder="Tìm sản phẩm, nguyên liệu, bài viết…"
+              placeholder="Tìm vị trí OOH, loại hình, case study…"
               aria-label="Nhập từ khoá tìm kiếm"
               className={cn(
                 "h-12 flex-1 bg-transparent font-display text-2xl text-ink-900",

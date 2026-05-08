@@ -17,15 +17,23 @@ export function CartPageClient() {
     <section className="py-16 sm:py-20">
       <Container size="wide" className="space-y-8">
         <div className="space-y-2">
-          <p className="eyebrow text-moss-700">Cart</p>
-          <h1 className="font-display text-4xl text-ink-900 sm:text-5xl">Gio hang cua ban</h1>
+          <p className="eyebrow text-moss-700">Giỏ vị trí</p>
+          <h1 className="font-display text-4xl text-ink-900 sm:text-5xl">
+            Vị trí OOH bạn quan tâm
+          </h1>
         </div>
 
         {items.length === 0 ? (
           <div className="rounded-3xl border border-line-100 bg-cream-50 p-8 text-center">
-            <p className="text-base text-ink-700">Ban chua co san pham nao trong gio hang.</p>
-            <Link href="/products" className={buttonStyles({ variant: "primary", size: "md" })}>
-              Di mua sam
+            <p className="text-base text-ink-700">
+              Bạn chưa chọn vị trí OOH nào. Hãy duyệt danh mục để bắt đầu xây dựng đề xuất
+              media plan.
+            </p>
+            <Link
+              href="/products"
+              className={buttonStyles({ variant: "primary", size: "md" })}
+            >
+              Duyệt vị trí OOH
             </Link>
           </div>
         ) : (

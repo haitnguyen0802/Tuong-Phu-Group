@@ -2,8 +2,9 @@ import type { Metadata } from "next";
 import { CartPageClient } from "@/components/cart/CartPageClient";
 
 export const metadata: Metadata = {
-  title: "Cart",
-  description: "Xem lai cac san pham da chon truoc khi thanh toan.",
+  title: "Giỏ vị trí",
+  description:
+    "Xem lại các vị trí OOH bạn đang quan tâm trước khi gửi yêu cầu báo giá tới Tường Phú Group.",
   alternates: {
     canonical: "/cart",
   },

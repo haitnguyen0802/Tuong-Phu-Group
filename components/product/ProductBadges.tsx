@@ -1,10 +1,10 @@
 import type { ProductBadge } from "@/types";
 
 const LABELS: Record<ProductBadge, string> = {
-  bestseller: "Best seller",
-  new: "Moi",
-  "low-stock": "Sap het",
-  limited: "Gioi han",
+  bestseller: "Hot",
+  new: "Mới",
+  "low-stock": "Sắp hết slot",
+  limited: "Độc quyền",
 };
 
 type ProductBadgesProps = {

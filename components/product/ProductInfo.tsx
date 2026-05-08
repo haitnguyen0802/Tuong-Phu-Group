@@ -19,28 +19,35 @@ type ProductInfoProps = {
 
 export function ProductInfo({ product, ingredientSummary }: ProductInfoProps) {
   const addItem = useCartStore((state) => state.addItem);
-  const outOfStock = product.stock < 1;
+  const noSlot = product.stock < 1;
 
   return (
     <div className="space-y-6">
       <p className="text-xs uppercase tracking-[0.14em] text-moss-700">{product.category}</p>
-      <h1 className="font-display text-4xl leading-tight text-ink-900 sm:text-5xl">{product.name}</h1>
+      <h1 className="font-display text-4xl leading-tight text-ink-900 sm:text-5xl">
+        {product.name}
+      </h1>
       <p className="text-base leading-relaxed text-ink-600">{product.shortDescription}</p>
       <ProductBadges badges={product.badges} />
 
       <div className="flex items-end gap-3">
         <p className="text-2xl font-semibold text-ink-900">{currency.format(product.price)}</p>
+        <span className="text-sm text-ink-500">/tháng</span>
         {product.comparePrice ? (
-          <p className="text-sm text-ink-400 line-through">{currency.format(product.comparePrice)}</p>
+          <p className="text-sm text-ink-400 line-through">
+            {currency.format(product.comparePrice)}
+          </p>
         ) : null}
       </div>
 
       <p className="text-sm text-clay-600">
-        {product.stock <= 10 ? `Chi con ${product.stock} san pham` : `San co ${product.stock} san pham`}
+        {product.stock <= 5
+          ? `Chỉ còn ${product.stock} slot trống trong tháng`
+          : `${product.stock} slot khả dụng — book ngay để giữ chỗ`}
       </p>
 
       <div className="space-y-2">
-        <p className="text-sm font-medium text-ink-800">Nguyen lieu noi bat</p>
+        <p className="text-sm font-medium text-ink-800">Loại hình OOH áp dụng</p>
         <ul className="flex flex-wrap gap-2">
           {ingredientSummary.map((name) => (
             <li
@@ -57,7 +64,7 @@ export function ProductInfo({ product, ingredientSummary }: ProductInfoProps) {
         <button
           type="button"
           className={buttonStyles({ variant: "primary", size: "lg" })}
-          disabled={outOfStock}
+          disabled={noSlot}
           onClick={() =>
             addItem(
               {
@@ -72,10 +79,10 @@ export function ProductInfo({ product, ingredientSummary }: ProductInfoProps) {
             )
           }
         >
-          {outOfStock ? "Tam het hang" : "Them vao gio"}
+          {noSlot ? "Đã hết slot" : "Thêm vào giỏ vị trí"}
         </button>
         <Link href="/products" className={buttonStyles({ variant: "outline", size: "lg" })}>
-          Quay lai danh sach
+          Quay lại danh mục vị trí
         </Link>
       </div>
     </div>

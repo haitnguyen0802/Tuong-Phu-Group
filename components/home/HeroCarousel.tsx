@@ -111,7 +111,7 @@ export function HeroCarousel({ slides, className }: HeroCarouselProps) {
   return (
     <section
       aria-roledescription="carousel"
-      aria-label="Chiến dịch nổi bật của Verdara"
+      aria-label="Vị trí OOH nổi bật của Tường Phú Group"
       className={cn("relative isolate", className)}
       onKeyDown={(e) => {
         if (e.key === "ArrowLeft") {

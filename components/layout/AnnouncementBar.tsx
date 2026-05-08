@@ -24,7 +24,7 @@ export function AnnouncementBar() {
   return (
     <div
       role="region"
-      aria-label="Thông báo từ Verdara"
+      aria-label="Thông báo từ Tường Phú Group"
       className="bg-moss-800 text-cream-100"
     >
       <div className="mx-auto flex h-9 w-full max-w-[90rem] items-center justify-center px-4 text-xs sm:text-[13px]">

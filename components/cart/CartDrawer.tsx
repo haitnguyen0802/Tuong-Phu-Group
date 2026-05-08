@@ -19,7 +19,10 @@ export function CartDrawer() {
   const itemCount = items.reduce((sum, item) => sum + item.quantity, 0);
 
   return (
-    <Dialog.Root open={isOpen} onOpenChange={(open) => (open ? undefined : closeCart())}>
+    <Dialog.Root
+      open={isOpen}
+      onOpenChange={(open) => (open ? undefined : closeCart())}
+    >
       <Dialog.Portal>
         <Dialog.Overlay className="fixed inset-0 z-40 bg-ink-900/45 backdrop-blur-sm" />
         <Dialog.Content
@@ -29,10 +32,15 @@ export function CartDrawer() {
           )}
         >
           <div className="flex items-center justify-between">
-            <Dialog.Title className="font-display text-2xl text-ink-900">Gio hang ({itemCount})</Dialog.Title>
+            <Dialog.Title className="font-display text-2xl text-ink-900">
+              Giỏ vị trí ({itemCount})
+            </Dialog.Title>
             <Dialog.Close
-              className={cn(buttonStyles({ variant: "ghost", size: "sm" }), "h-9 w-9 rounded-full p-0")}
-              aria-label="Dong gio hang"
+              className={cn(
+                buttonStyles({ variant: "ghost", size: "sm" }),
+                "h-9 w-9 rounded-full p-0",
+              )}
+              aria-label="Đóng giỏ vị trí"
             >
               <X className="h-4 w-4" />
             </Dialog.Close>
@@ -40,9 +48,14 @@ export function CartDrawer() {
 
           {items.length === 0 ? (
             <div className="mt-12 space-y-4 text-center">
-              <p className="text-base text-ink-700">Gio hang cua ban dang trong.</p>
-              <Link href="/products" className={buttonStyles({ variant: "outline", size: "md" })}>
-                Kham pha san pham
+              <p className="text-base text-ink-700">
+                Bạn chưa thêm vị trí OOH nào để xin báo giá.
+              </p>
+              <Link
+                href="/products"
+                className={buttonStyles({ variant: "outline", size: "md" })}
+              >
+                Khám phá vị trí OOH
               </Link>
             </div>
           ) : (
@@ -53,8 +66,14 @@ export function CartDrawer() {
                 ))}
               </div>
               <CartSummary pricing={pricing} itemCount={itemCount} compact />
-              <Link href="/cart" className={cn(buttonStyles({ variant: "outline", size: "md" }), "w-full")}>
-                Xem gio hang day du
+              <Link
+                href="/cart"
+                className={cn(
+                  buttonStyles({ variant: "outline", size: "md" }),
+                  "w-full",
+                )}
+              >
+                Xem toàn bộ giỏ vị trí
               </Link>
             </div>
           )}

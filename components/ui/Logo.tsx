@@ -11,7 +11,7 @@ type Props = {
 
 /**
  * Logotype lockup — display-serif wordmark with a small mark.
- * Avoids the actual Cocoon visual identity by using a different mark + font.
+ * Custom logomark for Tường Phú Group; no third-party trademarks reused.
  */
 export function Logo({ className, tone = "default" }: Props) {
   const colorClass = tone === "light" ? "text-cream-50" : "text-moss-800";

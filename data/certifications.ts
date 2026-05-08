@@ -1,41 +1,40 @@
 import type { Certification } from "@/types";
 
 /**
- * Logos are inline SVG strings — kept hand-drawn (not real organisations) to
- * avoid copying real trademarks. Replace `logo` with real assets when
- * partnerships are confirmed.
+ * Trong rebrand này, "Certification" được hiểu là Đối tác chiến lược / chứng nhận
+ * năng lực của Tường Phú Group trong lĩnh vực OOH.
  */
 export const certifications: Certification[] = [
   {
-    id: "vegan-society",
-    name: "Vegan Society",
-    organization: "Hiệp hội thuần chay quốc tế",
+    id: "vma",
+    name: "Vietnam Marketing Association",
+    organization: "Hội thành viên VMA",
     description:
-      "Toàn bộ công thức Verdara không chứa thành phần động vật và không thử nghiệm trên động vật.",
-    logo: "/images/certifications/vegan.svg",
+      "Thành viên chính thức của Hiệp hội Marketing Việt Nam, tham gia hội đồng tiêu chuẩn đo lường OOH 2025.",
+    logo: "/images/certifications/vma.svg",
   },
   {
-    id: "cruelty-free",
-    name: "Cruelty Free",
-    organization: "Chương trình bảo vệ động vật toàn cầu",
+    id: "vincom-partner",
+    name: "Vincom Retail Partner",
+    organization: "Đối tác chiến lược OOH",
     description:
-      "Verdara cam kết không thử nghiệm trên động vật ở mọi giai đoạn nghiên cứu và sản xuất.",
-    logo: "/images/certifications/cruelty-free.svg",
+      "Đối tác triển khai chính thức quảng cáo trong hệ thống Vincom Center, Vincom Plaza và Vincom Mega Mall trên toàn quốc.",
+    logo: "/images/certifications/vincom.svg",
   },
   {
-    id: "iso-22716",
-    name: "ISO 22716",
-    organization: "Tiêu chuẩn GMP mỹ phẩm",
+    id: "aeon-partner",
+    name: "AEON Mall Vietnam",
+    organization: "Đối tác media OOH",
     description:
-      "Nhà máy đạt chuẩn ISO 22716 về thực hành sản xuất tốt cho mỹ phẩm.",
+      "Đối tác cung cấp giải pháp atrium drop, decal thang máy và banner thang cuốn tại 6 AEON Mall trên toàn quốc.",
+    logo: "/images/certifications/aeon.svg",
+  },
+  {
+    id: "iso-9001",
+    name: "ISO 9001:2015",
+    organization: "Tiêu chuẩn quản lý chất lượng",
+    description:
+      "Hệ thống quản lý dự án và quy trình thi công OOH đạt chuẩn ISO 9001:2015 — đảm bảo timeline, chất lượng và an toàn lao động.",
     logo: "/images/certifications/iso.svg",
-  },
-  {
-    id: "eco-pack",
-    name: "EcoPack",
-    organization: "Liên minh bao bì bền vững",
-    description:
-      "Bao bì sử dụng tối thiểu 60% nhựa tái chế và mực in gốc đậu nành.",
-    logo: "/images/certifications/eco.svg",
   },
 ];

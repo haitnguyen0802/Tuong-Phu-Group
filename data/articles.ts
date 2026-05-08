@@ -2,45 +2,45 @@ import type { Article } from "@/types";
 
 export const articles: Article[] = [
   {
-    id: "a1",
-    slug: "skincare-routine-mua-mua",
-    title: "Routine 4 bước cho làn da mùa mưa miền Nam",
+    id: "a-honda-tet",
+    slug: "case-study-honda-tet-2026",
+    title: "Case study: Chiến dịch Honda Tết 2026 — atrium drop tại 12 mall",
     excerpt:
-      "Khi độ ẩm tăng cao và bụi mịn nhiều hơn, đây là cách chúng tôi giữ làn da khoẻ mà vẫn nhẹ tênh.",
-    category: "Skincare guide",
+      "Tường Phú Group triển khai 12 atrium drop banner đồng bộ trong 36 tiếng, đạt chỉ số visibility +47% so với mùa trước.",
+    category: "Case study",
     publishedAt: "2026-04-12",
-    readMinutes: 6,
+    readMinutes: 7,
     thumbnail: {
-      src: "https://images.unsplash.com/photo-1556228720-195a672e8a03?auto=format&fit=crop&w=1100&q=80",
-      alt: "Bộ skincare đặt cạnh ly nước chanh trên bàn gỗ",
+      src: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=1100&q=80",
+      alt: "Banner quảng cáo lớn treo trong toà nhà",
     },
   },
   {
-    id: "a2",
-    slug: "hanh-trinh-tu-sen-hau-giang",
-    title: "Hành trình một bông sen từ Hậu Giang đến chai serum",
+    id: "a-cho-truyen-thong",
+    slug: "vi-sao-cho-truyen-thong-van-hieu-qua",
+    title: "Vì sao quảng cáo chợ truyền thống vẫn là kênh OOH ‘đáng đồng tiền’",
     excerpt:
-      "Chúng tôi theo chân đội thu hái sen vào lúc 4 giờ sáng — và kể lại điều khiến nguyên liệu Việt khác biệt.",
-    category: "Behind the brand",
+      "Phân tích vùng phủ, chi phí trên 1.000 lượt xem (CPM) và hành vi mua sắm — lý do FMCG vẫn rót ngân sách lớn cho cổng chợ.",
+    category: "OOH insight",
     publishedAt: "2026-03-28",
     readMinutes: 9,
     thumbnail: {
-      src: "https://images.unsplash.com/photo-1567427017947-545c5f8d16ad?auto=format&fit=crop&w=1100&q=80",
-      alt: "Đầm sen lúc bình minh",
+      src: "https://images.unsplash.com/photo-1531259683007-016a7b628fc3?auto=format&fit=crop&w=1100&q=80",
+      alt: "Khu phố mua sắm với bảng quảng cáo lớn",
     },
   },
   {
-    id: "a3",
-    slug: "bao-bi-tai-che",
-    title: "Vì sao chúng tôi chọn nhựa tái chế thay vì thuỷ tinh",
+    id: "a-thi-cong-bat-lon",
+    slug: "behind-the-scenes-thi-cong-bat-200m2",
+    title: "Behind the scenes: Thi công bạt khổ lớn 200m² trong 36 tiếng",
     excerpt:
-      "Không phải lựa chọn nào ‘xanh’ cũng là lựa chọn đúng. Đây là cách Verdara cân nhắc giữa cảm giác cao cấp và thực tế tái chế.",
-    category: "Sustainability",
+      "Quy trình từ chốt thiết kế, in UV chống phai, tới ghép module và cẩu lắp ban đêm — đảm bảo timeline launching không trễ một phút.",
+    category: "Behind the scenes",
     publishedAt: "2026-03-05",
-    readMinutes: 7,
+    readMinutes: 6,
     thumbnail: {
-      src: "https://images.unsplash.com/photo-1620916566398-39f1143ab7be?auto=format&fit=crop&w=1100&q=80",
-      alt: "Chai mỹ phẩm tái chế giữa lá xanh",
+      src: "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=1100&q=80",
+      alt: "Khu vực thi công lắp đặt bạt quảng cáo",
     },
   },
 ];

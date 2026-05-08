@@ -7,15 +7,15 @@ import { primaryNav } from "@/data/nav";
 
 const supportLinks = [
   { label: "Câu hỏi thường gặp", href: "/help" },
-  { label: "Chính sách đổi trả", href: "/help/return" },
-  { label: "Chính sách vận chuyển", href: "/help/shipping" },
-  { label: "Liên hệ Verdara", href: "/contact" },
+  { label: "Quy trình triển khai", href: "/help/process" },
+  { label: "Hợp đồng & thanh toán", href: "/help/contract" },
+  { label: "Liên hệ Tường Phú Group", href: "/contact" },
 ];
 
 const aboutLinks = [
   { label: "Câu chuyện thương hiệu", href: "/story" },
-  { label: "Trách nhiệm cộng đồng", href: "/sustainability" },
-  { label: "Hệ thống cửa hàng", href: "/stores" },
+  { label: "Mạng lưới vị trí OOH", href: "/network" },
+  { label: "Case study tiêu biểu", href: "/journal" },
   { label: "Tuyển dụng", href: "/careers" },
 ];
 
@@ -43,8 +43,11 @@ export function Footer() {
             </div>
           </div>
 
-          <FooterColumn title="Khám phá" links={primaryNav.map(({ label, href }) => ({ label, href }))} />
-          <FooterColumn title="Về Verdara" links={aboutLinks} />
+          <FooterColumn
+            title="Khám phá"
+            links={primaryNav.map(({ label, href }) => ({ label, href }))}
+          />
+          <FooterColumn title="Về Tường Phú" links={aboutLinks} />
           <FooterColumn title="Hỗ trợ" links={supportLinks}>
             <dl className="mt-6 space-y-2 text-sm text-cream-100/75">
               <div className="flex flex-col">
@@ -59,15 +62,21 @@ export function Footer() {
                   </a>
                 </dd>
               </div>
+              <div className="flex flex-col">
+                <dt className="text-cream-100/60">Văn phòng</dt>
+                <dd className="text-cream-100/85">{brand.contact.address}</dd>
+              </div>
             </dl>
           </FooterColumn>
         </div>
 
         <div className="mt-14 flex flex-col gap-4 border-t border-cream-100/15 pt-6 text-xs text-cream-100/60 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} {brand.name}. Mọi quyền được bảo lưu.</p>
+          <p>
+            © {new Date().getFullYear()} {brand.name}. Mọi quyền được bảo lưu.
+          </p>
           <div className="flex flex-wrap gap-x-6 gap-y-2">
             <Link className="hover:text-cream-50" href="/legal/terms">
-              Điều khoản
+              Điều khoản dịch vụ
             </Link>
             <Link className="hover:text-cream-50" href="/legal/privacy">
               Chính sách bảo mật
@@ -93,7 +102,9 @@ function FooterColumn({
 }) {
   return (
     <div>
-      <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-cream-50">{title}</h3>
+      <h3 className="text-sm font-semibold uppercase tracking-[0.18em] text-cream-50">
+        {title}
+      </h3>
       <ul className="mt-5 space-y-3 text-sm text-cream-100/80">
         {links.map((link) => (
           <li key={link.href}>

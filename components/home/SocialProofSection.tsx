@@ -23,37 +23,35 @@ export function SocialProofSection({
   profileHref = socialProfileHref,
 }: SocialProofSectionProps) {
   return (
-    <section aria-label="Cong dong Verdara tren Instagram" className="pb-24 pt-6 sm:pb-28 sm:pt-10">
+    <section
+      aria-label="Dự án OOH đã triển khai bởi Tường Phú Group"
+      className="pb-24 pt-6 sm:pb-28 sm:pt-10"
+    >
       <Container size="wide" className="space-y-10">
         <FadeIn y={20}>
           <SectionTitle
             align="center"
-            eyebrow="Verdara community"
+            eyebrow="Dự án tiêu biểu"
             title={
               <>
-                Theo doi {handle}
-                <span className="block text-moss-700">de cap nhat thoi quen cham da hang ngay.</span>
+                Theo dõi {handle}
+                <span className="block text-moss-700">để xem các campaign OOH mới nhất.</span>
               </>
             }
-            lead="Khoanh khac that tu nguoi dung, vung trong nguyen lieu va hau truong cong thuc — ket noi voi chung toi tren mang xa hoi."
+            lead="Tổng hợp những dự án OOH thực tế Tường Phú Group đã triển khai cho các thương hiệu — từ FMCG, ngân hàng, bảo hiểm đến công nghệ & ô tô."
           />
         </FadeIn>
 
         <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6">
           {posts.map((post, index) => (
-            <FadeIn
-              key={post.id}
-              delay={index * 0.05}
-              y={14}
-              className="contents"
-            >
+            <FadeIn key={post.id} delay={index * 0.05} y={14} className="contents">
               <li>
                 <Link
                   href={post.href}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group relative block aspect-square overflow-hidden rounded-2xl border border-line-100 bg-cream-100/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-moss-700/40 focus-visible:ring-offset-2 focus-visible:ring-offset-cream-50"
-                  aria-label={`Mo bai dang Instagram: ${post.caption}`}
+                  aria-label={`Mở dự án: ${post.caption}`}
                 >
                   <Image
                     src={post.image.src}
@@ -91,10 +89,10 @@ export function SocialProofSection({
             target="_blank"
             rel="noopener noreferrer"
             className={buttonStyles({ variant: "outline", size: "lg" })}
-            aria-label={`Theo doi Verdara tren Instagram (${handle})`}
+            aria-label={`Theo dõi Tường Phú Group trên Facebook (${handle})`}
           >
-            <SocialIcon name="instagram" className="h-4 w-4" />
-            Theo doi tren Instagram
+            <SocialIcon name="facebook" className="h-4 w-4" />
+            Theo dõi trên Facebook
           </Link>
         </div>
       </Container>

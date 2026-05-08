@@ -10,14 +10,17 @@ type CertificationSectionProps = {
 
 export function CertificationSection({ items = certifications }: CertificationSectionProps) {
   return (
-    <section aria-label="Chung nhan chat luong va cam ket" className="py-20 sm:py-24 lg:py-28">
+    <section
+      aria-label="Đối tác và năng lực Tường Phú Group"
+      className="py-20 sm:py-24 lg:py-28"
+    >
       <Container size="wide">
         <div className="space-y-10 rounded-[2rem] border border-line-100 bg-cream-50/85 p-6 sm:p-8 lg:p-12">
           <SectionTitle
             align="center"
-            eyebrow="Certification"
-            title="Chung nhan xay dung niem tin truoc moi quy trinh cham da."
-            lead="Moi lo san xuat cua Verdara duoc doi chieu voi bo tieu chi an toan, thu thach dao duc va tieu chuan van hanh ben vung."
+            eyebrow="Đối tác & năng lực"
+            title="Đối tác chiến lược của các thương hiệu và mạng lưới TTTM hàng đầu."
+            lead="Mỗi vị trí OOH triển khai bởi Tường Phú Group đều có hợp đồng độc quyền hoặc đối tác chính thức — đảm bảo tính pháp lý, an toàn và đo lường minh bạch."
           />
 
           <ul className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
@@ -35,11 +38,13 @@ export function CertificationSection({ items = certifications }: CertificationSe
 
                   <h3 className="mt-4 text-lg font-semibold text-ink-900">{certification.name}</h3>
                   <p className="mt-1 text-sm text-moss-700">{certification.organization}</p>
-                  <p className="mt-3 text-sm leading-relaxed text-ink-600">{certification.description}</p>
+                  <p className="mt-3 text-sm leading-relaxed text-ink-600">
+                    {certification.description}
+                  </p>
 
                   <div className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-ink-700">
                     <ShieldCheck className="h-4 w-4 text-moss-700" aria-hidden strokeWidth={1.8} />
-                    Kiem dinh doc lap
+                    Hợp đồng & pháp lý đầy đủ
                   </div>
                 </article>
               </li>

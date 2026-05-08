@@ -11,9 +11,9 @@ import { NewsletterSection } from "@/components/home/NewsletterSection";
 import { getHomepageData } from "@/lib/cms/get-homepage-data";
 
 export const metadata: Metadata = {
-  title: "Home",
+  title: "Trang chu",
   description:
-    "Kham pha hanh trinh cham da thuan chay Verdara: cong thuc toi gian, nguyen lieu Viet Nam va routine phuc hoi diu nhe.",
+    "Tuong Phu Group — Giai phap quang cao OOH toan dien: bang LED, billboard cao toc, frame va decal thang may, banner thang cuon, atrium TTTM, cong cho va in bat kho lon tren toan quoc.",
 };
 
 export const revalidate = 300;

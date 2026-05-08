@@ -8,10 +8,10 @@ import { bestSellers } from "@/data/products";
 import type { Product, ProductBadge } from "@/types";
 
 const BADGE_LABELS: Record<ProductBadge, string> = {
-  bestseller: "Best seller",
-  new: "Moi",
-  "low-stock": "Sap het",
-  limited: "Gioi han",
+  bestseller: "Hot",
+  new: "Mới",
+  "low-stock": "Sắp hết slot",
+  limited: "Độc quyền",
 };
 
 const currencyFormatter = new Intl.NumberFormat("vi-VN", {
@@ -30,7 +30,7 @@ function ProductCard({ product }: { product: Product }) {
       <Link
         href={`/products/${product.slug}`}
         className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-moss-700/40 focus-visible:ring-offset-2 focus-visible:ring-offset-cream-50"
-        aria-label={`Xem chi tiet ${product.name}`}
+        aria-label={`Xem chi tiết vị trí ${product.name}`}
       >
         <div className="relative aspect-[4/5] overflow-hidden border-b border-line-100 bg-cream-100/70">
           <Image
@@ -72,22 +72,27 @@ function ProductCard({ product }: { product: Product }) {
         </h3>
         <p className="mt-2 text-sm leading-relaxed text-ink-600">{product.shortDescription}</p>
         <p className="mt-3 text-sm text-clay-600">
-          {product.stock <= 10 ? `Chi con ${product.stock} san pham` : `San co ${product.stock} san pham`}
+          {product.stock <= 5
+            ? `Chỉ còn ${product.stock} slot trong tháng`
+            : `${product.stock} slot khả dụng`}
         </p>
 
         <div className="mt-4 flex items-end justify-between gap-3">
           <div className="flex items-end gap-2">
             <span className="text-lg font-semibold text-ink-900">{formatPrice(product.price)}</span>
+            <span className="text-xs text-ink-500">/tháng</span>
             {product.comparePrice ? (
-              <span className="text-sm text-ink-400 line-through">{formatPrice(product.comparePrice)}</span>
+              <span className="text-sm text-ink-400 line-through">
+                {formatPrice(product.comparePrice)}
+              </span>
             ) : null}
           </div>
           <Link
             href={`/products/${product.slug}`}
             className="inline-flex items-center gap-1 text-sm font-medium text-moss-700 transition-colors hover:text-moss-800"
-            aria-label={`Mua nhanh ${product.name}`}
+            aria-label={`Yêu cầu báo giá ${product.name}`}
           >
-            Mua nhanh
+            Báo giá nhanh
             <ArrowRight className="h-4 w-4" aria-hidden strokeWidth={1.8} />
           </Link>
         </div>
@@ -102,13 +107,13 @@ type BestSellerProductGridProps = {
 
 export function BestSellerProductGrid({ products = bestSellers }: BestSellerProductGridProps) {
   return (
-    <section aria-label="San pham ban chay" className="pb-24 pt-8 sm:pb-28 lg:pt-12">
+    <section aria-label="Vị trí OOH nổi bật" className="pb-24 pt-8 sm:pb-28 lg:pt-12">
       <Container size="wide" className="space-y-10">
         <SectionTitle
           align="center"
-          eyebrow="Best seller"
-          title="Lua chon duoc dat mua nhieu nhat tai Verdara."
-          lead="Danh sach san pham duoc doi ngu cong thuc toi uu ve cam giac su dung, do an toan va kha nang phuc hoi nen da."
+          eyebrow="Vị trí nổi bật"
+          title="Top vị trí OOH được brand đặt nhiều nhất tại Tường Phú Group."
+          lead="Danh mục được tổng hợp từ dữ liệu booking 2025 — ưu tiên các vị trí có lưu lượng cao, hợp đồng độc quyền và phù hợp đa ngành hàng."
         />
 
         <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-3">
@@ -121,9 +126,9 @@ export function BestSellerProductGrid({ products = bestSellers }: BestSellerProd
           <Link
             href="/products"
             className={buttonStyles({ variant: "outline", size: "lg" })}
-            aria-label="Xem tat ca san pham Verdara"
+            aria-label="Xem toàn bộ vị trí OOH của Tường Phú Group"
           >
-            Xem tat ca san pham
+            Xem toàn bộ vị trí OOH
           </Link>
         </div>
       </Container>

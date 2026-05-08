@@ -1,6 +1,6 @@
 import { brand } from "@/data/brand";
 
-const FALLBACK_SITE_URL = "https://verdara.example";
+const FALLBACK_SITE_URL = "https://tuongphugroup.vn";
 
 function sanitizeSiteUrl(value: string): string {
   return value.endsWith("/") ? value.slice(0, -1) : value;

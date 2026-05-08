@@ -69,7 +69,7 @@ export const useCartStore = create<CartState>()(
       markHydrated: () => set({ hydrated: true }),
     }),
     {
-      name: "verdara-cart",
+      name: "tuong-phu-cart",
       storage: createJSONStorage(() => localStorage),
       partialize: (state) => ({ items: state.items }),
       onRehydrateStorage: () => (state) => {

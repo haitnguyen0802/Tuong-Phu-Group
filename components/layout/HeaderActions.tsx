@@ -30,21 +30,21 @@ export function HeaderActions({ className }: Props) {
       </button>
       <button
         type="button"
-        aria-label="Tài khoản"
+        aria-label="Tài khoản khách hàng"
         className={cn(iconButton, "hidden sm:inline-flex")}
       >
         <User className="h-5 w-5" strokeWidth={1.6} />
       </button>
       <button
         type="button"
-        aria-label="Yêu thích"
+        aria-label="Vị trí đã lưu"
         className={cn(iconButton, "hidden sm:inline-flex")}
       >
         <Heart className="h-5 w-5" strokeWidth={1.6} />
       </button>
       <button
         type="button"
-        aria-label={`Mo gio hang, ${cartCount} san pham`}
+        aria-label={`Mở giỏ vị trí đang quan tâm, ${cartCount} mục`}
         className={cn(iconButton, "relative")}
         onClick={openCart}
       >

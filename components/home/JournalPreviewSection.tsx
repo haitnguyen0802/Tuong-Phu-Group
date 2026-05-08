@@ -22,14 +22,14 @@ export function JournalPreviewSection({ items = articles }: JournalPreviewSectio
   const previewArticles = items.slice(0, 3);
 
   return (
-    <section aria-label="Bai viet moi nhat tu journal" className="pb-24 pt-4 sm:pb-28 sm:pt-8">
+    <section aria-label="Cẩm nang OOH & case study" className="pb-24 pt-4 sm:pb-28 sm:pt-8">
       <Container size="wide" className="space-y-10">
         <FadeIn y={20}>
           <SectionTitle
             align="center"
-            eyebrow="Journal preview"
-            title="Nhat ky kien thuc cham da va cau chuyen thuong hieu."
-            lead="Cap nhat xu huong cham soc da, quy trinh R&D va nhung ghi chep ve hanh trinh nguyen lieu tren tung vung dat Viet Nam."
+            eyebrow="Cẩm nang OOH"
+            title="Case study & insight thị trường quảng cáo ngoài trời."
+            lead="Cập nhật quy trình triển khai chiến dịch, dữ liệu đo lường và những bài học rút ra từ các campaign Tường Phú Group đồng hành cùng đối tác."
           />
         </FadeIn>
 
@@ -44,7 +44,7 @@ export function JournalPreviewSection({ items = articles }: JournalPreviewSectio
               <Link
                 href={`/journal/${article.slug}`}
                 className="block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-moss-700/40 focus-visible:ring-offset-2 focus-visible:ring-offset-cream-50"
-                aria-label={`Doc bai viet ${article.title}`}
+                aria-label={`Đọc bài viết ${article.title}`}
               >
                 <div className="relative aspect-[16/10] overflow-hidden border-b border-line-100">
                   <Image
@@ -58,7 +58,9 @@ export function JournalPreviewSection({ items = articles }: JournalPreviewSectio
               </Link>
 
               <div className="flex flex-1 flex-col space-y-4 p-5">
-                <p className="text-xs uppercase tracking-[0.14em] text-moss-700">{article.category}</p>
+                <p className="text-xs uppercase tracking-[0.14em] text-moss-700">
+                  {article.category}
+                </p>
                 <h3 className="text-xl font-semibold leading-snug text-ink-900">
                   <Link
                     href={`/journal/${article.slug}`}
@@ -73,16 +75,16 @@ export function JournalPreviewSection({ items = articles }: JournalPreviewSectio
                   <span>{dateFormatter.format(new Date(article.publishedAt))}</span>
                   <span className="inline-flex items-center gap-1">
                     <Clock3 className="h-4 w-4" aria-hidden strokeWidth={1.7} />
-                    {article.readMinutes} phut doc
+                    {article.readMinutes} phút đọc
                   </span>
                 </div>
 
                 <Link
                   href={`/journal/${article.slug}`}
                   className="inline-flex items-center gap-1 text-sm font-medium text-moss-700 transition-colors hover:text-moss-800"
-                  aria-label={`Doc tiep bai viet ${article.title}`}
+                  aria-label={`Đọc tiếp bài viết ${article.title}`}
                 >
-                  Doc tiep
+                  Đọc tiếp
                   <ArrowRight className="h-4 w-4" aria-hidden strokeWidth={1.8} />
                 </Link>
               </div>
@@ -94,9 +96,9 @@ export function JournalPreviewSection({ items = articles }: JournalPreviewSectio
           <Link
             href="/journal"
             className={buttonStyles({ variant: "outline", size: "lg" })}
-            aria-label="Xem tat ca bai viet journal"
+            aria-label="Xem tất cả bài viết Cẩm nang OOH"
           >
-            Xem tat ca bai viet
+            Xem tất cả bài viết
           </Link>
         </div>
       </Container>

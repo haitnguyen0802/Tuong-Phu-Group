@@ -80,10 +80,10 @@ export function MobileMenu() {
 
           <div className="border-t border-line-100 p-5">
             <Button variant="primary" size="md" className="w-full">
-              Đăng nhập / Đăng ký
+              Yêu cầu báo giá
             </Button>
             <p className="mt-3 text-center text-xs text-ink-500">
-              Miễn phí giao hàng cho đơn từ 499.000 đ
+              Hotline 1900 8688 — phản hồi báo giá trong 24h
             </p>
           </div>
         </Dialog.Content>

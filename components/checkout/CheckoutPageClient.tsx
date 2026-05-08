@@ -16,15 +16,27 @@ export function CheckoutPageClient() {
     <section className="py-16 sm:py-20">
       <Container size="wide" className="space-y-8">
         <div className="space-y-2">
-          <p className="eyebrow text-moss-700">Checkout</p>
-          <h1 className="font-display text-4xl text-ink-900 sm:text-5xl">Thanh toan</h1>
+          <p className="eyebrow text-moss-700">Yêu cầu báo giá</p>
+          <h1 className="font-display text-4xl text-ink-900 sm:text-5xl">
+            Gửi yêu cầu báo giá OOH
+          </h1>
+          <p className="text-sm text-ink-500">
+            Điền thông tin doanh nghiệp & campaign — Tường Phú Group sẽ phản hồi báo
+            giá chi tiết trong vòng 24h.
+          </p>
         </div>
 
         {items.length === 0 ? (
           <div className="rounded-3xl border border-line-100 bg-cream-50 p-8 text-center">
-            <p className="text-base text-ink-700">Gio hang rong. Hay them san pham truoc khi checkout.</p>
-            <Link href="/products" className={buttonStyles({ variant: "primary", size: "md" })}>
-              Den trang san pham
+            <p className="text-base text-ink-700">
+              Giỏ vị trí trống. Vui lòng chọn ít nhất một vị trí trước khi gửi yêu cầu báo
+              giá.
+            </p>
+            <Link
+              href="/products"
+              className={buttonStyles({ variant: "primary", size: "md" })}
+            >
+              Đến danh mục vị trí OOH
             </Link>
           </div>
         ) : (

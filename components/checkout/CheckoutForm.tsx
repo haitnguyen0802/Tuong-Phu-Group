@@ -14,17 +14,17 @@ import type { CheckoutFormValues, MockOrderPayload } from "@/types";
 
 const checkoutSchema = z.object({
   contact: z.object({
-    email: z.email("Email khong hop le"),
+    email: z.email("Email không hợp lệ"),
   }),
   shipping: z.object({
-    fullName: z.string().min(2, "Vui long nhap ho ten"),
-    phone: z.string().min(9, "So dien thoai khong hop le"),
-    addressLine1: z.string().min(4, "Vui long nhap dia chi"),
-    ward: z.string().min(2, "Vui long nhap phuong/xa"),
-    district: z.string().min(2, "Vui long nhap quan/huyen"),
-    city: z.string().min(2, "Vui long nhap tinh/thanh pho"),
+    fullName: z.string().min(2, "Vui lòng nhập họ tên người liên hệ"),
+    phone: z.string().min(9, "Số điện thoại không hợp lệ"),
+    addressLine1: z.string().min(2, "Vui lòng nhập tên công ty / nhãn hàng"),
+    ward: z.string().min(2, "Vui lòng nhập ngành hàng"),
+    district: z.string().min(2, "Vui lòng nhập khu vực mong muốn triển khai"),
+    city: z.string().min(2, "Vui lòng nhập thời điểm dự kiến chạy campaign"),
   }),
-  note: z.string().max(300, "Ghi chu toi da 300 ky tu").optional(),
+  note: z.string().max(500, "Ghi chú tối đa 500 ký tự").optional(),
 });
 
 type Props = {
@@ -34,8 +34,12 @@ type Props = {
 const fieldClassName =
   "mt-1 w-full rounded-2xl border border-line-200 bg-cream-50 px-4 py-3 text-sm text-ink-900 outline-none transition focus:border-moss-700";
 
-function generateMockOrderCode() {
-  return `VD${crypto.randomUUID().replace(/-/g, "").slice(0, 8).toUpperCase()}`;
+function generateMockQuoteCode() {
+  return `TPQ${crypto
+    .randomUUID()
+    .replace(/-/g, "")
+    .slice(0, 8)
+    .toUpperCase()}`;
 }
 
 export function CheckoutForm({ defaultValues }: Props) {
@@ -43,7 +47,7 @@ export function CheckoutForm({ defaultValues }: Props) {
   const clearCart = useCartStore((state) => state.clearCart);
   const pricing = calculateOrderPricing(items);
   const router = useRouter();
-  const [orderCode, setOrderCode] = useState<string | null>(null);
+  const [quoteCode, setQuoteCode] = useState<string | null>(null);
 
   const form = useForm<CheckoutFormValues>({
     resolver: zodResolver(checkoutSchema),
@@ -70,7 +74,7 @@ export function CheckoutForm({ defaultValues }: Props) {
     }
 
     const payload: MockOrderPayload = {
-      orderCode: generateMockOrderCode(),
+      orderCode: generateMockQuoteCode(),
       items,
       pricing,
       customer: values,
@@ -78,20 +82,33 @@ export function CheckoutForm({ defaultValues }: Props) {
     };
 
     await new Promise((resolve) => setTimeout(resolve, 500));
-    setOrderCode(payload.orderCode);
+    setQuoteCode(payload.orderCode);
     clearCart();
   });
 
-  if (orderCode) {
+  if (quoteCode) {
     return (
       <div className="rounded-3xl border border-line-100 bg-cream-50 p-8 text-center">
-        <p className="eyebrow text-moss-700">Order success</p>
-        <h2 className="mt-2 font-display text-3xl text-ink-900">Cam on ban da dat hang</h2>
+        <p className="eyebrow text-moss-700">Yêu cầu đã ghi nhận</p>
+        <h2 className="mt-2 font-display text-3xl text-ink-900">
+          Cảm ơn bạn đã gửi yêu cầu báo giá
+        </h2>
         <p className="mt-3 text-sm text-ink-600">
-          Ma don hang mock: <span className="font-semibold text-ink-900">{orderCode}</span>
+          Mã yêu cầu báo giá:{" "}
+          <span className="font-semibold text-ink-900">{quoteCode}</span>
         </p>
-        <Link href="/products" className={cn(buttonStyles({ variant: "primary", size: "md" }), "mt-6 inline-flex")}>
-          Tiep tuc mua sam
+        <p className="mt-2 text-sm text-ink-500">
+          Tường Phú Group sẽ phản hồi bằng email trong vòng 24h. Vui lòng kiểm tra cả mục
+          spam.
+        </p>
+        <Link
+          href="/products"
+          className={cn(
+            buttonStyles({ variant: "primary", size: "md" }),
+            "mt-6 inline-flex",
+          )}
+        >
+          Tiếp tục xem vị trí OOH
         </Link>
       </div>
     );
@@ -100,44 +117,73 @@ export function CheckoutForm({ defaultValues }: Props) {
   return (
     <form onSubmit={submit} className="space-y-6">
       <fieldset className="space-y-4 rounded-3xl border border-line-100 bg-cream-50 p-5 sm:p-6">
-        <legend className="px-1 font-display text-2xl text-ink-900">Thong tin lien he</legend>
+        <legend className="px-1 font-display text-2xl text-ink-900">
+          Thông tin liên hệ
+        </legend>
         <div>
           <label htmlFor="contact.email" className="text-sm text-ink-700">
-            Email
+            Email công ty
           </label>
-          <input id="contact.email" className={fieldClassName} {...form.register("contact.email")} />
+          <input
+            id="contact.email"
+            className={fieldClassName}
+            {...form.register("contact.email")}
+          />
           {form.formState.errors.contact?.email ? (
-            <p className="mt-1 text-xs text-clay-600">{form.formState.errors.contact.email.message}</p>
+            <p className="mt-1 text-xs text-clay-600">
+              {form.formState.errors.contact.email.message}
+            </p>
           ) : null}
         </div>
       </fieldset>
 
       <fieldset className="space-y-4 rounded-3xl border border-line-100 bg-cream-50 p-5 sm:p-6">
-        <legend className="px-1 font-display text-2xl text-ink-900">Dia chi giao hang</legend>
+        <legend className="px-1 font-display text-2xl text-ink-900">Thông tin campaign</legend>
         <div className="grid gap-4 sm:grid-cols-2">
-          <Field label="Ho va ten" error={form.formState.errors.shipping?.fullName?.message}>
+          <Field
+            label="Người liên hệ"
+            error={form.formState.errors.shipping?.fullName?.message}
+          >
             <input className={fieldClassName} {...form.register("shipping.fullName")} />
           </Field>
-          <Field label="So dien thoai" error={form.formState.errors.shipping?.phone?.message}>
+          <Field
+            label="Số điện thoại"
+            error={form.formState.errors.shipping?.phone?.message}
+          >
             <input className={fieldClassName} {...form.register("shipping.phone")} />
           </Field>
         </div>
-        <Field label="Dia chi cu the" error={form.formState.errors.shipping?.addressLine1?.message}>
-          <input className={fieldClassName} {...form.register("shipping.addressLine1")} />
+        <Field
+          label="Tên công ty / nhãn hàng"
+          error={form.formState.errors.shipping?.addressLine1?.message}
+        >
+          <input
+            className={fieldClassName}
+            {...form.register("shipping.addressLine1")}
+          />
         </Field>
         <div className="grid gap-4 sm:grid-cols-3">
-          <Field label="Phuong/Xa" error={form.formState.errors.shipping?.ward?.message}>
+          <Field
+            label="Ngành hàng"
+            error={form.formState.errors.shipping?.ward?.message}
+          >
             <input className={fieldClassName} {...form.register("shipping.ward")} />
           </Field>
-          <Field label="Quan/Huyen" error={form.formState.errors.shipping?.district?.message}>
+          <Field
+            label="Khu vực triển khai"
+            error={form.formState.errors.shipping?.district?.message}
+          >
             <input className={fieldClassName} {...form.register("shipping.district")} />
           </Field>
-          <Field label="Tinh/Thanh pho" error={form.formState.errors.shipping?.city?.message}>
+          <Field
+            label="Thời điểm dự kiến"
+            error={form.formState.errors.shipping?.city?.message}
+          >
             <input className={fieldClassName} {...form.register("shipping.city")} />
           </Field>
         </div>
 
-        <Field label="Ghi chu" error={form.formState.errors.note?.message}>
+        <Field label="Ghi chú thêm" error={form.formState.errors.note?.message}>
           <textarea className={fieldClassName} rows={4} {...form.register("note")} />
         </Field>
       </fieldset>
@@ -145,9 +191,14 @@ export function CheckoutForm({ defaultValues }: Props) {
       <button
         type="submit"
         disabled={form.formState.isSubmitting || !items.length}
-        className={cn(buttonStyles({ variant: "primary", size: "lg" }), "w-full sm:w-auto")}
+        className={cn(
+          buttonStyles({ variant: "primary", size: "lg" }),
+          "w-full sm:w-auto",
+        )}
       >
-        {form.formState.isSubmitting ? "Dang xu ly..." : "Xac nhan don hang (mock)"}
+        {form.formState.isSubmitting
+          ? "Đang gửi yêu cầu..."
+          : "Gửi yêu cầu báo giá"}
       </button>
     </form>
   );

@@ -25,10 +25,14 @@ export const metadata: Metadata = {
   description: brand.description,
   metadataBase: new URL(siteUrl),
   keywords: [
-    "my pham thuan chay",
-    "cham soc da",
-    "nguyen lieu viet nam",
-    "verdara",
+    "quảng cáo OOH",
+    "quảng cáo ngoài trời",
+    "bảng LED",
+    "frame thang máy",
+    "atrium TTTM",
+    "billboard",
+    "Tường Phú Group",
+    "quảng cáo chợ",
   ],
   alternates: {
     canonical: "/",
@@ -46,10 +50,10 @@ export const metadata: Metadata = {
     locale: "vi_VN",
     images: [
       {
-        url: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9",
+        url: "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=1200&q=80",
         width: 1200,
         height: 630,
-        alt: `${brand.name} botanical skincare`,
+        alt: `${brand.name} — giải pháp quảng cáo OOH toàn diện`,
       },
     ],
   },
@@ -57,7 +61,9 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteTitle,
     description: brand.description,
-    images: ["https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9"],
+    images: [
+      "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=1200&q=80",
+    ],
   },
   icons: {
     icon: "/favicon.ico",

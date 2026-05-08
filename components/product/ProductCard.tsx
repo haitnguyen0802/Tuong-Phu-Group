@@ -46,7 +46,10 @@ export function ProductCard({ product }: ProductCardProps) {
 
         <div className="mt-auto flex items-end justify-between gap-3">
           <div className="flex items-end gap-2">
-            <span className="text-lg font-semibold text-ink-900">{currency.format(product.price)}</span>
+            <span className="text-lg font-semibold text-ink-900">
+              {currency.format(product.price)}
+            </span>
+            <span className="text-xs text-ink-500">/tháng</span>
             {product.comparePrice ? (
               <span className="text-sm text-ink-400 line-through">
                 {currency.format(product.comparePrice)}
@@ -57,7 +60,7 @@ export function ProductCard({ product }: ProductCardProps) {
             href={`/products/${product.slug}`}
             className="inline-flex items-center gap-1 text-sm font-medium text-moss-700"
           >
-            Xem chi tiet
+            Xem chi tiết
             <ArrowRight className="h-4 w-4" aria-hidden />
           </Link>
         </div>

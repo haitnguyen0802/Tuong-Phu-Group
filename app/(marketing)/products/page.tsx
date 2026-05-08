@@ -13,8 +13,9 @@ type ProductsPageProps = {
 };
 
 export const metadata: Metadata = {
-  title: "Products",
-  description: "Danh sach san pham cham da thuong hieu Verdara.",
+  title: "Vị trí OOH",
+  description:
+    "Danh mục vị trí quảng cáo OOH của Tường Phú Group: LED, billboard, frame thang máy, decal thang máy, atrium TTTM, cổng chợ và in bạt khổ lớn.",
   alternates: { canonical: "/products" },
 };
 
@@ -28,19 +29,22 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
   });
 
   const sortOptions = [
-    { value: "name-asc", label: "Ten A-Z" },
-    { value: "price-asc", label: "Gia thap den cao" },
-    { value: "price-desc", label: "Gia cao den thap" },
+    { value: "name-asc", label: "Tên A-Z" },
+    { value: "price-asc", label: "Giá thấp đến cao" },
+    { value: "price-desc", label: "Giá cao đến thấp" },
   ] as const;
 
   return (
     <section className="py-16 sm:py-20">
       <Container size="wide" className="space-y-8">
         <div className="space-y-3">
-          <p className="eyebrow text-moss-700">Product listing</p>
-          <h1 className="font-display text-4xl text-ink-900 sm:text-5xl">San pham Verdara</h1>
+          <p className="eyebrow text-moss-700">Danh mục vị trí</p>
+          <h1 className="font-display text-4xl text-ink-900 sm:text-5xl">
+            Vị trí OOH Tường Phú Group
+          </h1>
           <p className="text-sm text-ink-500">
-            Data source: <span className="font-medium">{data.source}</span> • Canonical: {siteUrl}/products
+            Nguồn dữ liệu: <span className="font-medium">{data.source}</span> • Canonical:{" "}
+            {siteUrl}/products
           </p>
         </div>
 
@@ -50,7 +54,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
               href="/products"
               className={`rounded-full px-4 py-2 text-sm ${data.activeCategory === "all" ? "bg-moss-700 text-cream-50" : "bg-cream-100 text-ink-700"}`}
             >
-              Tat ca
+              Tất cả
             </Link>
             {data.categories.map((category) => (
               <Link
@@ -68,7 +72,7 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
               <input type="hidden" name="category" value={data.activeCategory} />
             ) : null}
             <label htmlFor="sort" className="text-sm text-ink-700">
-              Sap xep
+              Sắp xếp
             </label>
             <select
               id="sort"
@@ -82,8 +86,11 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
                 </option>
               ))}
             </select>
-            <button type="submit" className="rounded-full bg-moss-700 px-4 py-2 text-sm text-cream-50">
-              Ap dung
+            <button
+              type="submit"
+              className="rounded-full bg-moss-700 px-4 py-2 text-sm text-cream-50"
+            >
+              Áp dụng
             </button>
           </form>
         </div>
