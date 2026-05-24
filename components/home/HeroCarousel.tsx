@@ -67,10 +67,7 @@ export function HeroCarousel({ slides, className }: HeroCarouselProps) {
   const [autoplayActive, setAutoplayActive] = React.useState(false);
   const [progressTick, setProgressTick] = React.useState(0);
 
-  const scrollTo = React.useCallback(
-    (index: number) => emblaApi?.scrollTo(index),
-    [emblaApi],
-  );
+  const scrollTo = React.useCallback((index: number) => emblaApi?.scrollTo(index), [emblaApi]);
   const scrollPrev = React.useCallback(() => emblaApi?.scrollPrev(), [emblaApi]);
   const scrollNext = React.useCallback(() => emblaApi?.scrollNext(), [emblaApi]);
 
@@ -112,7 +109,7 @@ export function HeroCarousel({ slides, className }: HeroCarouselProps) {
     <section
       aria-roledescription="carousel"
       aria-label="Vị trí OOH nổi bật của Tường Phú Group"
-      className={cn("relative isolate", className)}
+      className={cn("relative isolate h-dvh overflow-hidden", className)}
       onKeyDown={(e) => {
         if (e.key === "ArrowLeft") {
           e.preventDefault();
@@ -124,26 +121,22 @@ export function HeroCarousel({ slides, className }: HeroCarouselProps) {
       }}
     >
       {/* Embla viewport. We crop the row of slides via `overflow-hidden`. */}
-      <div className="overflow-hidden" ref={emblaRef}>
+      <div className="h-full overflow-hidden" ref={emblaRef}>
         <div
           // Live region so screen readers announce the active slide title.
           aria-live="polite"
           aria-atomic="false"
-          className="flex"
+          className="flex h-full"
         >
           {slides.map((slide, i) => (
             <div
               key={slide.id}
-              className="min-w-0 flex-[0_0_100%]"
+              className="h-full min-w-0 flex-[0_0_100%]"
               role="group"
               aria-roledescription="slide"
               aria-label={`${i + 1} trên ${slides.length}: ${slide.title}`}
             >
-              <HeroSlide
-                slide={slide}
-                isActive={i === selected}
-                preload={i === 0}
-              />
+              <HeroSlide slide={slide} isActive={i === selected} preload={i === 0} />
             </div>
           ))}
         </div>
@@ -152,9 +145,7 @@ export function HeroCarousel({ slides, className }: HeroCarouselProps) {
       {/* Pagination + arrows pinned to the bottom of the hero. */}
       <Container
         size="wide"
-        className={cn(
-          "pointer-events-none absolute inset-x-0 bottom-6 z-10 sm:bottom-10",
-        )}
+        className={cn("pointer-events-none absolute inset-x-0 bottom-6 z-10 sm:bottom-10")}
       >
         <div className="pointer-events-auto">
           <HeroPagination

@@ -1,16 +1,16 @@
 import type { MetadataRoute } from "next";
-import { getProductListingData } from "@/lib/cms/get-products-data";
+import { getArticlesData } from "@/lib/cms/get-articles-data";
 import { siteUrl } from "@/lib/site";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date();
-  const productData = await getProductListingData();
+  const articles = await getArticlesData();
 
-  const productRoutes = productData.items.map((product) => ({
-    url: `${siteUrl}/products/${product.slug}`,
+  const articleRoutes = articles.map((article) => ({
+    url: `${siteUrl}/journal/${article.slug}`,
     lastModified,
     changeFrequency: "weekly" as const,
-    priority: 0.8,
+    priority: 0.7,
   }));
 
   return [
@@ -18,14 +18,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       url: siteUrl,
       lastModified,
       changeFrequency: "weekly",
-      priority: 0.9,
-    },
-    {
-      url: `${siteUrl}/products`,
-      lastModified,
-      changeFrequency: "daily",
       priority: 1,
     },
-    ...productRoutes,
+    ...articleRoutes,
   ];
 }

@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Link from "next/link";
 import { ArrowRight, MapPin } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionTitle } from "@/components/ui/SectionTitle";
@@ -33,9 +32,9 @@ export function IngredientStorySection({ items = ingredients }: IngredientStoryS
               key={format.id}
               delay={index * 0.06}
               y={18}
-              className="group overflow-hidden rounded-[1.6rem] border border-line-100 bg-cream-50"
+              className="group border-line-100 bg-cream-50 overflow-hidden rounded-[1.6rem] border"
             >
-              <div className="relative aspect-[4/3] overflow-hidden border-b border-line-100">
+              <div className="border-line-100 relative aspect-[4/3] overflow-hidden border-b">
                 <Image
                   src={format.image.src}
                   alt={format.image.alt}
@@ -46,33 +45,33 @@ export function IngredientStorySection({ items = ingredients }: IngredientStoryS
               </div>
 
               <div className="space-y-4 p-5">
-                <h3 className="text-xl font-semibold text-ink-900">{format.name}</h3>
-                <p className="inline-flex items-center gap-2 text-sm text-moss-700">
+                <h3 className="text-ink-900 text-xl font-semibold">{format.name}</h3>
+                <p className="text-moss-700 inline-flex items-center gap-2 text-sm">
                   <MapPin className="h-4 w-4" aria-hidden strokeWidth={1.7} />
                   {format.region}
                 </p>
-                <p className="text-sm leading-relaxed text-ink-600">{format.description}</p>
-                <Link
-                  href={`/ingredients/${format.id}`}
-                  className="inline-flex items-center gap-1 text-sm font-medium text-moss-700 transition-colors hover:text-moss-800"
-                  aria-label={`Xem chi tiết loại hình ${format.name}`}
+                <p className="text-ink-600 text-sm leading-relaxed">{format.description}</p>
+                <a
+                  href="#newsletter"
+                  className="text-moss-700 hover:text-moss-800 inline-flex items-center gap-1 text-sm font-medium transition-colors"
+                  aria-label={`Tư vấn loại hình ${format.name}`}
                 >
-                  Xem chi tiết loại hình
+                  Tư vấn loại hình
                   <ArrowRight className="h-4 w-4" aria-hidden strokeWidth={1.8} />
-                </Link>
+                </a>
               </div>
             </FadeIn>
           ))}
         </div>
 
         <div className="flex justify-center">
-          <Link
-            href="/ingredients"
+          <a
+            href="#newsletter"
             className={buttonStyles({ variant: "outline", size: "lg" })}
-            aria-label="Xem tất cả loại hình OOH"
+            aria-label="Tư vấn tất cả loại hình OOH"
           >
-            Xem tất cả loại hình OOH
-          </Link>
+            Tư vấn loại hình OOH
+          </a>
         </div>
       </Container>
     </section>
