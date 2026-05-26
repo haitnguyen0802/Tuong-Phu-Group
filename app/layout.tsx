@@ -3,6 +3,11 @@ import { Inter, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import { brand } from "@/data/brand";
 import { siteTitle, siteUrl } from "@/lib/site";
+import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
+import { Header } from "@/components/layout/Header";
+import { MobileMenu } from "@/components/layout/MobileMenu";
+import { SearchOverlay } from "@/components/layout/SearchOverlay";
+import { CartDrawer } from "@/components/cart/CartDrawer";
 
 const sans = Inter({
   variable: "--font-sans",
@@ -82,7 +87,12 @@ export default function RootLayout({
       className={`${sans.variable} ${display.variable}`}
     >
       <body className="min-h-screen bg-background text-foreground antialiased">
+        <AnnouncementBar />
+        <Header />
         {children}
+        <SearchOverlay />
+        <MobileMenu />
+        <CartDrawer />
       </body>
     </html>
   );

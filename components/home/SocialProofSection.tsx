@@ -24,6 +24,7 @@ export function SocialProofSection({
 }: SocialProofSectionProps) {
   return (
     <section
+      id="projects"
       aria-label="Dự án OOH đã triển khai bởi Tường Phú Group"
       className="pb-24 pt-6 sm:pb-28 sm:pt-10"
     >

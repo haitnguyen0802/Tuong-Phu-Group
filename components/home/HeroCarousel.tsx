@@ -107,6 +107,7 @@ export function HeroCarousel({ slides, className }: HeroCarouselProps) {
 
   return (
     <section
+      id="hero"
       aria-roledescription="carousel"
       aria-label="Vị trí OOH nổi bật của Tường Phú Group"
       className={cn("relative isolate h-dvh overflow-hidden", className)}

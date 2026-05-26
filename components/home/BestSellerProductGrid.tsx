@@ -95,7 +95,11 @@ type BestSellerProductGridProps = {
 
 export function BestSellerProductGrid({ products = bestSellers }: BestSellerProductGridProps) {
   return (
-    <section aria-label="Vị trí OOH nổi bật" className="pt-8 pb-24 sm:pb-28 lg:pt-12">
+    <section
+      id="featured"
+      aria-label="Vị trí OOH nổi bật"
+      className="pt-8 pb-24 sm:pb-28 lg:pt-12"
+    >
       <Container size="wide" className="space-y-10">
         <SectionTitle
           align="center"

@@ -11,6 +11,7 @@ type CertificationSectionProps = {
 export function CertificationSection({ items = certifications }: CertificationSectionProps) {
   return (
     <section
+      id="partners"
       aria-label="Đối tác và năng lực Tường Phú Group"
       className="py-20 sm:py-24 lg:py-28"
     >

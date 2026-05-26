@@ -21,7 +21,11 @@ export function NewsLinksSection({ items = articles }: NewsLinksSectionProps) {
   const previewArticles = items.slice(0, 3);
 
   return (
-    <section aria-label="Tin tức mới nhất" className="pt-6 pb-24 sm:pt-10 sm:pb-28">
+    <section
+      id="news"
+      aria-label="Tin tức mới nhất"
+      className="pt-6 pb-24 sm:pt-10 sm:pb-28"
+    >
       <Container size="wide" className="space-y-10">
         <FadeIn y={20}>
           <SectionTitle

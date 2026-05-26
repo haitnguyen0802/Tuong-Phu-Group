@@ -15,7 +15,11 @@ export function IngredientStorySection({ items = ingredients }: IngredientStoryS
   const displayFormats = items.slice(0, 5);
 
   return (
-    <section aria-label="Loại hình quảng cáo OOH" className="py-24 sm:py-28">
+    <section
+      id="formats"
+      aria-label="Loại hình quảng cáo OOH"
+      className="py-24 sm:py-28"
+    >
       <Container size="wide" className="space-y-10">
         <FadeIn y={20}>
           <SectionTitle

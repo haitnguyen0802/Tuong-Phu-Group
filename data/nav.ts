@@ -56,6 +56,16 @@ export const primaryNav: NavItem[] = [
   { label: "Đối tác", href: "/certifications" },
 ];
 
+export const headerSections = [
+  { label: "Trang chủ", href: "/#hero" },
+  { label: "Đối tác", href: "/#partners" },
+  { label: "Vị trí nổi bật", href: "/#featured" },
+  { label: "Loại hình OOH", href: "/#formats" },
+  { label: "Dự án", href: "/#projects" },
+  { label: "Tin tức", href: "/#news" },
+  { label: "Liên hệ", href: "/#newsletter" },
+];
+
 export const searchSuggestions = [
   "LED Sài Gòn",
   "Frame thang máy",
