@@ -1,8 +1,10 @@
-import { ingredients } from "@/data/ingredients";
-import { bestSellers as fallbackProducts } from "@/data/products";
 import type { Product, ProductBadge } from "@/types";
-import { mapProduct } from "./mappers";
-import { queryProducts } from "./queries";
+import { mapIngredient, mapProduct } from "./mappers";
+import {
+  queryIngredients,
+  queryProductBySlug,
+  queryProducts,
+} from "./queries";
 
 const PRODUCT_BADGES: ProductBadge[] = ["new", "bestseller", "low-stock", "limited"];
 
@@ -18,23 +20,16 @@ export type ProductListingData = {
   categories: string[];
   activeCategory: string;
   activeSort: ProductSort;
-  source: "cms" | "fallback";
 };
 
 export type ProductDetailData = {
   product: Product;
   related: Product[];
   ingredientSummary: string[];
-  source: "cms" | "fallback";
 };
 
 function normalizeProducts(cmsProducts: Awaited<ReturnType<typeof queryProducts>>) {
-  if (!cmsProducts.length) return fallbackProducts;
-  return cmsProducts.map((item, index) =>
-    mapProduct(item, fallbackProducts[index] ?? fallbackProducts[0], {
-      productBadges: PRODUCT_BADGES,
-    }),
-  );
+  return cmsProducts.map((item) => mapProduct(item, { productBadges: PRODUCT_BADGES }));
 }
 
 function sortProducts(items: Product[], sort: ProductSort) {
@@ -49,12 +44,10 @@ export async function getProductListingData(
 ): Promise<ProductListingData> {
   const cmsProducts = await queryProducts();
   const products = normalizeProducts(cmsProducts);
-  const source = cmsProducts.length ? "cms" : "fallback";
 
   const categories = Array.from(new Set(products.map((item) => item.category)));
-  const activeCategory = options.category && categories.includes(options.category)
-    ? options.category
-    : "all";
+  const activeCategory =
+    options.category && categories.includes(options.category) ? options.category : "all";
   const activeSort = options.sort ?? "name-asc";
 
   const filtered =
@@ -67,28 +60,35 @@ export async function getProductListingData(
     categories,
     activeCategory,
     activeSort,
-    source,
   };
 }
 
 export async function getProductDetailData(slug: string): Promise<ProductDetailData | null> {
-  const cmsProducts = await queryProducts();
-  const products = normalizeProducts(cmsProducts);
-  const source = cmsProducts.length ? "cms" : "fallback";
+  const [cmsProduct, cmsProducts, cmsIngredients] = await Promise.all([
+    queryProductBySlug(slug),
+    queryProducts(),
+    queryIngredients(),
+  ]);
 
-  const product = products.find((item) => item.slug === slug);
-  if (!product) return null;
+  if (!cmsProduct) return null;
+
+  const product = mapProduct(cmsProduct, { productBadges: PRODUCT_BADGES });
+  const products = normalizeProducts(cmsProducts);
 
   const related = products
     .filter((item) => item.slug !== product.slug && item.category === product.category)
     .slice(0, 3);
 
-  const ingredientSummary = ingredients.slice(0, 3).map((item) => item.name);
+  const ingredientMap = new Map(
+    cmsIngredients.map((item) => [item.id, mapIngredient(item).name] as const),
+  );
+  const ingredientSummary = (product.ingredientIds ?? [])
+    .map((id) => ingredientMap.get(id))
+    .filter((name): name is string => Boolean(name));
 
   return {
     product,
     related,
     ingredientSummary,
-    source,
   };
 }

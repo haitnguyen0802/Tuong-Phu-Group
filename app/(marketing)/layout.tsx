@@ -1,10 +1,13 @@
-import { Footer } from "@/components/layout/Footer";
+import { SiteFooter } from "@/components/layout/SiteFooter";
+import { fetchFooter } from "@/lib/api";
 
-export default function MarketingLayout({ children }: { children: React.ReactNode }) {
+export default async function MarketingLayout({ children }: { children: React.ReactNode }) {
+  const footer = await fetchFooter();
+
   return (
     <div className="flex min-h-screen flex-col">
-      <main className="flex-1 pt-16 lg:pt-20">{children}</main>
-      <Footer />
+      <main className="flex-1">{children}</main>
+      <SiteFooter initialFooter={footer} />
     </div>
   );
 }

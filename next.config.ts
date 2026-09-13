@@ -6,10 +6,12 @@ const projectRoot = dirname(fileURLToPath(import.meta.url));
 
 const nextConfig: NextConfig = {
   reactStrictMode: true,
+  output: "export",
   turbopack: {
     root: projectRoot,
   },
   images: {
+    unoptimized: true,
     qualities: [65, 75, 85],
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 60 * 60 * 24 * 14,
@@ -31,7 +33,7 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "fastly.picsum.photos",
+        hostname: "res.cloudinary.com",
         pathname: "/**",
       },
     ],

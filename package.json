@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --webpack",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "build:static": "node scripts/prepare-build-env.mjs && next build",
+    "pack:cpanel": "powershell -ExecutionPolicy Bypass -File ./scripts/pack-cpanel.ps1"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

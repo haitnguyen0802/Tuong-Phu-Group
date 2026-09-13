@@ -1,6 +1,6 @@
 import * as React from "react";
 
-type SocialName = "instagram" | "facebook" | "tiktok" | "youtube";
+type SocialName = "instagram" | "facebook" | "tiktok" | "youtube" | (string & {});
 
 type Props = React.SVGAttributes<SVGSVGElement> & {
   name: SocialName;
@@ -51,6 +51,13 @@ export function SocialIcon({ name, ...rest }: Props) {
         <svg viewBox="0 0 24 24" fill="none" aria-hidden {...rest}>
           <rect x="3" y="6" width="18" height="12" rx="3" stroke="currentColor" strokeWidth="1.5" />
           <path d="M10.5 9.5v5l4-2.5z" fill="currentColor" />
+        </svg>
+      );
+    default:
+      return (
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden {...rest}>
+          <circle cx="12" cy="12" r="8" stroke="currentColor" strokeWidth="1.5" />
+          <path d="M9 12h6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
         </svg>
       );
   }

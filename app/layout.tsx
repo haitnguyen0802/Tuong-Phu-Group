@@ -1,97 +1,95 @@
 import type { Metadata } from "next";
-import { Inter, Cormorant_Garamond } from "next/font/google";
+import { Roboto } from "next/font/google";
 import "./globals.css";
-import { brand } from "@/data/brand";
-import { siteTitle, siteUrl } from "@/lib/site";
-import { AnnouncementBar } from "@/components/layout/AnnouncementBar";
+import { getSiteChromeData } from "@/lib/api";
+import { siteUrl } from "@/lib/site";
 import { Header } from "@/components/layout/Header";
 import { MobileMenu } from "@/components/layout/MobileMenu";
 import { SearchOverlay } from "@/components/layout/SearchOverlay";
 import { CartDrawer } from "@/components/cart/CartDrawer";
 
-const sans = Inter({
+const sans = Roboto({
   variable: "--font-sans",
   subsets: ["latin", "vietnamese"],
+  weight: ["400", "500", "700", "900"],
   display: "swap",
 });
 
-const display = Cormorant_Garamond({
-  variable: "--font-display",
-  subsets: ["latin", "vietnamese"],
-  weight: ["400", "500", "600", "700"],
-  display: "swap",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const chrome = await getSiteChromeData();
+  const { brand } = chrome;
+  const siteTitle = `${brand.name} — ${brand.tagline}`;
 
-export const metadata: Metadata = {
-  title: {
-    default: siteTitle,
-    template: `%s · ${brand.name}`,
-  },
-  description: brand.description,
-  metadataBase: new URL(siteUrl),
-  keywords: [
-    "quảng cáo OOH",
-    "quảng cáo ngoài trời",
-    "bảng LED",
-    "frame thang máy",
-    "atrium TTTM",
-    "billboard",
-    "Tường Phú Group",
-    "quảng cáo chợ",
-  ],
-  alternates: {
-    canonical: "/",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
-  openGraph: {
-    type: "website",
-    title: siteTitle,
+  return {
+    title: {
+      default: siteTitle,
+      template: `%s · ${brand.name}`,
+    },
     description: brand.description,
-    siteName: brand.name,
-    url: siteUrl,
-    locale: "vi_VN",
-    images: [
-      {
-        url: "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=1200&q=80",
-        width: 1200,
-        height: 630,
-        alt: `${brand.name} — giải pháp quảng cáo OOH toàn diện`,
-      },
+    metadataBase: new URL(siteUrl),
+    keywords: [
+      "quảng cáo OOH",
+      "quảng cáo ngoài trời",
+      "bảng LED",
+      "frame thang máy",
+      "atrium TTTM",
+      "billboard",
+      "Tường Phú Group",
+      "quảng cáo chợ",
     ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: siteTitle,
-    description: brand.description,
-    images: [
-      "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?auto=format&fit=crop&w=1200&q=80",
-    ],
-  },
-  icons: {
-    icon: "/favicon.ico",
-  },
-};
+    alternates: {
+      canonical: "/",
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+    openGraph: {
+      type: "website",
+      title: siteTitle,
+      description: brand.description,
+      siteName: brand.name,
+      url: siteUrl,
+      locale: "vi_VN",
+      images: [
+        {
+          url: "/images/03_Quang_Cao_Ngoai_Troi/slide_04_image_01_image5.jpg",
+          width: 1200,
+          height: 630,
+          alt: `${brand.name} — giải pháp quảng cáo OOH toàn diện`,
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: siteTitle,
+      description: brand.description,
+      images: ["/images/03_Quang_Cao_Ngoai_Troi/slide_04_image_01_image5.jpg"],
+    },
+    icons: {
+      icon: "/favicon.ico",
+    },
+  };
+}
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const chrome = await getSiteChromeData();
+
   return (
     <html
       lang="vi"
       data-scroll-behavior="smooth"
-      className={`${sans.variable} ${display.variable}`}
+      className={sans.variable}
     >
       <body className="min-h-screen bg-background text-foreground antialiased">
-        <AnnouncementBar />
-        <Header />
+        <Header brandName={chrome.brand.name} navItems={chrome.headerSections} />
         {children}
-        <SearchOverlay />
-        <MobileMenu />
+        <SearchOverlay searchSuggestions={chrome.searchSuggestions} />
+        <MobileMenu brandName={chrome.brand.name} navItems={chrome.headerSections} />
         <CartDrawer />
       </body>
     </html>

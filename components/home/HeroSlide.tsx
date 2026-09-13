@@ -174,7 +174,7 @@ export function HeroSlide({ slide, isActive, preload = false }: HeroSlideProps) 
             fetchPriority={preload ? "high" : undefined}
             sizes="(min-width: 1024px) 50vw, (min-width: 768px) 55vw, 100vw"
             className={cn(
-              "object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+              "object-contain transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
               isActive ? "scale-100" : "scale-[1.04]",
               lowEnd && "scale-100 transition-none",
             )}

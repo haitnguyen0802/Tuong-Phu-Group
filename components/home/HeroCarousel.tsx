@@ -48,13 +48,13 @@ export function HeroCarousel({ slides, className }: HeroCarouselProps) {
   );
 
   const plugins = React.useMemo(
-    () => (reduce || lowEnd ? [] : [autoplay]),
-    [reduce, lowEnd, autoplay],
+    () => (reduce || lowEnd || slides.length <= 1 ? [] : [autoplay]),
+    [reduce, lowEnd, autoplay, slides.length],
   );
 
   const [emblaRef, emblaApi] = useEmblaCarousel(
     {
-      loop: true,
+      loop: slides.length > 1,
       align: "start",
       containScroll: false,
       skipSnaps: false,
@@ -110,7 +110,10 @@ export function HeroCarousel({ slides, className }: HeroCarouselProps) {
       id="hero"
       aria-roledescription="carousel"
       aria-label="Vị trí OOH nổi bật của Tường Phú Group"
-      className={cn("relative isolate h-dvh overflow-hidden", className)}
+      className={cn(
+        "relative isolate h-[calc(100dvh-var(--header-offset))] overflow-hidden",
+        className,
+      )}
       onKeyDown={(e) => {
         if (e.key === "ArrowLeft") {
           e.preventDefault();
@@ -144,22 +147,24 @@ export function HeroCarousel({ slides, className }: HeroCarouselProps) {
       </div>
 
       {/* Pagination + arrows pinned to the bottom of the hero. */}
-      <Container
-        size="wide"
-        className={cn("pointer-events-none absolute inset-x-0 bottom-6 z-10 sm:bottom-10")}
-      >
-        <div className="pointer-events-auto">
-          <HeroPagination
-            count={slides.length}
-            selected={selected}
-            onSelect={scrollTo}
-            onPrev={scrollPrev}
-            onNext={scrollNext}
-            progressDurationMs={autoplayActive ? AUTOPLAY_DELAY_MS : null}
-            progressTick={progressTick}
-          />
-        </div>
-      </Container>
+      {slides.length > 1 ? (
+        <Container
+          size="wide"
+          className={cn("pointer-events-none absolute inset-x-0 bottom-6 z-10 sm:bottom-10")}
+        >
+          <div className="pointer-events-auto">
+            <HeroPagination
+              count={slides.length}
+              selected={selected}
+              onSelect={scrollTo}
+              onPrev={scrollPrev}
+              onNext={scrollNext}
+              progressDurationMs={autoplayActive ? AUTOPLAY_DELAY_MS : null}
+              progressTick={progressTick}
+            />
+          </div>
+        </Container>
+      ) : null}
     </section>
   );
 }

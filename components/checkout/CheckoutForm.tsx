@@ -8,9 +8,10 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { buttonStyles } from "@/components/ui/Button";
 import { cn } from "@/lib/cn";
+import { buildPublicApiUrl } from "@/lib/api";
 import { useCartStore } from "@/lib/store/useCartStore";
 import { calculateOrderPricing } from "@/lib/utils/price";
-import type { CheckoutFormValues, MockOrderPayload } from "@/types";
+import type { CheckoutFormValues } from "@/types";
 
 const checkoutSchema = z.object({
   contact: z.object({
@@ -34,20 +35,13 @@ type Props = {
 const fieldClassName =
   "mt-1 w-full rounded-2xl border border-line-200 bg-cream-50 px-4 py-3 text-sm text-ink-900 outline-none transition focus:border-moss-700";
 
-function generateMockQuoteCode() {
-  return `TPQ${crypto
-    .randomUUID()
-    .replace(/-/g, "")
-    .slice(0, 8)
-    .toUpperCase()}`;
-}
-
 export function CheckoutForm({ defaultValues }: Props) {
   const items = useCartStore((state) => state.items);
   const clearCart = useCartStore((state) => state.clearCart);
   const pricing = calculateOrderPricing(items);
   const router = useRouter();
   const [quoteCode, setQuoteCode] = useState<string | null>(null);
+  const [submitError, setSubmitError] = useState<string>("");
 
   const form = useForm<CheckoutFormValues>({
     resolver: zodResolver(checkoutSchema),
@@ -73,15 +67,38 @@ export function CheckoutForm({ defaultValues }: Props) {
       return;
     }
 
-    const payload: MockOrderPayload = {
-      orderCode: generateMockQuoteCode(),
-      items,
-      pricing,
-      customer: values,
-      createdAt: new Date().toISOString(),
-    };
+    setSubmitError("");
 
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    const response = await fetch(buildPublicApiUrl("/quotes"), {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        items,
+        pricing,
+        customer: values,
+        createdAt: new Date().toISOString(),
+        website: "",
+      }),
+    });
+
+    const payload = (await response.json().catch(() => null)) as
+      | { orderCode?: string; message?: string; error?: string }
+      | null;
+
+    if (!response.ok) {
+      setSubmitError(
+        payload?.message ?? payload?.error ?? "Không thể gửi yêu cầu báo giá, vui lòng thử lại.",
+      );
+      return;
+    }
+
+    if (!payload?.orderCode) {
+      setSubmitError("Không nhận được mã yêu cầu báo giá từ hệ thống, vui lòng thử lại.");
+      return;
+    }
+
     setQuoteCode(payload.orderCode);
     clearCart();
   });
@@ -116,6 +133,7 @@ export function CheckoutForm({ defaultValues }: Props) {
 
   return (
     <form onSubmit={submit} className="space-y-6">
+      <input type="text" tabIndex={-1} autoComplete="off" name="website" className="hidden" aria-hidden />
       <fieldset className="space-y-4 rounded-3xl border border-line-100 bg-cream-50 p-5 sm:p-6">
         <legend className="px-1 font-display text-2xl text-ink-900">
           Thông tin liên hệ
@@ -200,6 +218,7 @@ export function CheckoutForm({ defaultValues }: Props) {
           ? "Đang gửi yêu cầu..."
           : "Gửi yêu cầu báo giá"}
       </button>
+      {submitError ? <p className="text-clay-600 text-sm">{submitError}</p> : null}
     </form>
   );
 }

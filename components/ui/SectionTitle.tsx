@@ -1,10 +1,12 @@
 import * as React from "react";
 import { cn } from "@/lib/cn";
+import type { SectionHeading } from "@/types";
 import { Eyebrow } from "./Eyebrow";
 
 type Props = {
+  heading?: SectionHeading;
   eyebrow?: string;
-  title: React.ReactNode;
+  title?: React.ReactNode;
   lead?: React.ReactNode;
   align?: "left" | "center";
   as?: "h1" | "h2" | "h3";
@@ -12,13 +14,26 @@ type Props = {
 };
 
 export function SectionTitle({
-  eyebrow,
-  title,
-  lead,
-  align = "left",
+  heading,
+  eyebrow: eyebrowProp,
+  title: titleProp,
+  lead: leadProp,
+  align: alignProp = "left",
   as: Tag = "h2",
   className,
 }: Props) {
+  if (heading === undefined && titleProp === undefined) {
+    return null;
+  }
+
+  const eyebrow = heading?.eyebrow ?? eyebrowProp;
+  const title = heading?.title ?? titleProp;
+  const lead = heading?.lead ?? leadProp;
+  const align = heading?.align ?? alignProp;
+
+  if (!title) {
+    return null;
+  }
   return (
     <div
       className={cn(

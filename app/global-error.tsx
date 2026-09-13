@@ -28,7 +28,7 @@ export default function GlobalError({ error, reset }: Props) {
             </h1>
             <p className="text-sm leading-relaxed text-ink-600 sm:text-base">
               Tường Phú Group đã ghi nhận lỗi này. Bạn vui lòng thử lại trong giây lát
-              hoặc liên hệ hotline 1900 8688 nếu vẫn không truy cập được.
+              hoặc liên hệ hotline 0398829946 nếu vẫn không truy cập được.
             </p>
             <button
               type="button"

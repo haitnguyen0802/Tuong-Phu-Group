@@ -1,4 +1,4 @@
-import { brand } from "@/data/brand";
+import { getSiteChromeData } from "@/lib/api/site";
 
 const FALLBACK_SITE_URL = "https://tuongphugroup.vn";
 
@@ -10,4 +10,7 @@ export const siteUrl = sanitizeSiteUrl(
   process.env.NEXT_PUBLIC_SITE_URL || FALLBACK_SITE_URL,
 );
 
-export const siteTitle = `${brand.name} — ${brand.tagline}`;
+export async function getSiteTitle() {
+  const chrome = await getSiteChromeData();
+  return `${chrome.brand.name} — ${chrome.brand.tagline}`;
+}

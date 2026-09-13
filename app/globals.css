@@ -10,14 +10,14 @@
   --color-cream-200: #ebdfc6;
   --color-cream-300: #ddcca7;
 
-  --color-moss-50: #eef2ec;
-  --color-moss-100: #d6e0d2;
-  --color-moss-200: #a9bda1;
-  --color-moss-400: #5d7a52;
-  --color-moss-600: #3b5732;
-  --color-moss-700: #2f4a3c;
-  --color-moss-800: #1f3327;
-  --color-moss-900: #11201a;
+  --color-moss-50: #fff1f2;
+  --color-moss-100: #ffe0e2;
+  --color-moss-200: #ffb8bc;
+  --color-moss-400: #f45c62;
+  --color-moss-600: #ed333a;
+  --color-moss-700: #e92229;
+  --color-moss-800: #c8171d;
+  --color-moss-900: #950d12;
 
   --color-clay-300: #e7a587;
   --color-clay-500: #c46a4f;
@@ -36,7 +36,7 @@
   --color-line-200: #e5dccc;
 
   /* Semantic alias --------------------------------------------------------- */
-  --color-background: var(--color-cream-50);
+  --color-background: #ebf9fb;
   --color-foreground: var(--color-ink-900);
   --color-muted: var(--color-ink-500);
   --color-border: var(--color-line-200);
@@ -47,7 +47,7 @@
 
   /* Typography ------------------------------------------------------------- */
   --font-sans: var(--font-sans);
-  --font-display: var(--font-display);
+  --font-display: var(--font-sans);
 
   --text-eyebrow: 0.75rem;
   --tracking-eyebrow: 0.18em;
@@ -57,6 +57,8 @@
   --container-wide: 90rem; /* 1440px */
   --radius-button: 9999px;
   --radius-card: 1.25rem;
+  --header-height: 90px;
+  --header-offset: var(--header-height);
 
   /* Motion ----------------------------------------------------------------- */
   --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
@@ -66,15 +68,20 @@
 /* Base ---------------------------------------------------------------------- */
 @layer base {
   html {
+    min-height: 100%;
+    background: var(--color-background);
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     color-scheme: light;
     scroll-behavior: smooth;
+    scroll-padding-top: var(--header-offset);
   }
 
   body {
+    min-height: 100vh;
     background-color: var(--color-background);
     color: var(--color-foreground);
+    padding-top: var(--header-offset);
     font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
     font-feature-settings:
       "ss01" on,
@@ -90,8 +97,12 @@
   h2,
   h3,
   h4 {
-    font-family: var(--font-display), ui-serif, Georgia, serif;
+    font-family: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
     letter-spacing: -0.01em;
+  }
+
+  section[id] {
+    scroll-margin-top: var(--header-offset);
   }
 
   /* Reduced motion fallback for any animation we author */

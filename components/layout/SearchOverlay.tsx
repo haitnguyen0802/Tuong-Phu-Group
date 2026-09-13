@@ -5,8 +5,11 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { Search, X } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { useUIStore } from "@/lib/store/useUIStore";
-import { searchSuggestions } from "@/data/nav";
 import { Eyebrow } from "@/components/ui/Eyebrow";
+
+type SearchOverlayProps = {
+  searchSuggestions: string[];
+};
 
 const FOCUS_DELAY_MS = 60;
 
@@ -17,7 +20,7 @@ const FOCUS_DELAY_MS = 60;
  * `preventDefault()` and a placeholder console log. Real querying lives in a
  * later phase (Phase 5+ once we have product/article search wiring).
  */
-export function SearchOverlay() {
+export function SearchOverlay({ searchSuggestions }: SearchOverlayProps) {
   const open = useUIStore((s) => s.isSearchOpen);
   const close = useUIStore((s) => s.closeSearch);
 
