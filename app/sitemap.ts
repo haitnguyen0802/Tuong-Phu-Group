@@ -2,6 +2,8 @@ import type { MetadataRoute } from "next";
 import { getArticlesData } from "@/lib/cms/get-articles-data";
 import { siteUrl } from "@/lib/site";
 
+export const dynamic = "force-static";
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const lastModified = new Date();
   const articles = await getArticlesData();

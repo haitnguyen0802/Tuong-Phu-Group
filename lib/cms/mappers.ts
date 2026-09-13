@@ -1,7 +1,18 @@
-import type { ImageAsset, ProductBadge } from "@/types";
+import type {
+  Article,
+  CampaignSlide,
+  Certification,
+  FormatsCatalog,
+  ImageAsset,
+  Ingredient,
+  Product,
+  ProductBadge,
+  SocialPost,
+} from "@/types";
 import type {
   CmsArticle,
   CmsCertification,
+  CmsFormatsCatalog,
   CmsImage,
   CmsIngredient,
   CmsProduct,
@@ -10,109 +21,123 @@ import type {
   MapperContext,
 } from "./types";
 
-function mapImage(image: CmsImage | undefined, fallback: ImageAsset): ImageAsset {
-  if (!image) return fallback;
+function mapImage(image: CmsImage): ImageAsset {
+  const src = image.src ?? image.url;
+  if (!src) {
+    throw new Error("Image is missing src or url");
+  }
+
   return {
-    src: image.src ?? image.url ?? fallback.src,
-    alt: image.alt ?? fallback.alt,
-    width: image.width ?? fallback.width,
-    height: image.height ?? fallback.height,
+    src,
+    alt: image.alt ?? "",
+    width: image.width,
+    height: image.height,
   };
 }
 
-export function mapSlide(raw: CmsSlide, fallback: (typeof import("@/data/slides"))["heroSlides"][number]) {
+export function mapSlide(raw: CmsSlide): CampaignSlide {
   return {
-    id: raw.id ?? fallback.id,
-    eyebrow: raw.eyebrow ?? fallback.eyebrow,
-    title: raw.title ?? fallback.title,
-    description: raw.description ?? fallback.description,
-    ctaLabel: raw.ctaLabel ?? fallback.ctaLabel,
-    ctaHref: raw.ctaHref ?? fallback.ctaHref,
-    backgroundClass: raw.backgroundClass ?? fallback.backgroundClass,
-    accentClass: raw.accentClass ?? fallback.accentClass,
-    image: mapImage(raw.image, fallback.image),
+    id: raw.id,
+    eyebrow: raw.eyebrow,
+    title: raw.title,
+    description: raw.description,
+    ctaLabel: raw.ctaLabel,
+    ctaHref: raw.ctaHref,
+    backgroundClass: raw.backgroundClass,
+    accentClass: raw.accentClass,
+    image: mapImage(raw.image),
   };
 }
 
-export function mapProduct(
-  raw: CmsProduct,
-  fallback: (typeof import("@/data/products"))["bestSellers"][number],
-  context: MapperContext,
-) {
+export function mapProduct(raw: CmsProduct, context: MapperContext): Product {
   const allowedBadges = new Set<ProductBadge>(context.productBadges);
-  const mappedBadges = (raw.badges ?? fallback.badges).filter((badge): badge is ProductBadge =>
+  const badges = (raw.badges ?? []).filter((badge): badge is ProductBadge =>
     allowedBadges.has(badge as ProductBadge),
   );
 
   return {
-    id: raw.id ?? fallback.id,
-    slug: raw.slug ?? fallback.slug,
-    name: raw.name ?? fallback.name,
-    shortDescription: raw.shortDescription ?? fallback.shortDescription,
-    category: raw.category ?? fallback.category,
-    price: raw.price ?? fallback.price,
-    comparePrice: raw.comparePrice ?? fallback.comparePrice,
-    stock: raw.stock ?? fallback.stock,
-    badges: mappedBadges.length > 0 ? mappedBadges : fallback.badges,
-    frontImage: mapImage(raw.frontImage, fallback.frontImage),
-    backImage: mapImage(raw.backImage, fallback.backImage),
-    galleryImages:
-      raw.galleryImages?.map((image) => mapImage(image, fallback.frontImage)) ??
-      fallback.galleryImages,
-    ingredientIds: raw.ingredientIds ?? fallback.ingredientIds,
+    id: raw.id,
+    slug: raw.slug,
+    name: raw.name,
+    shortDescription: raw.shortDescription,
+    category: raw.category,
+    price: raw.price ?? 0,
+    comparePrice: raw.comparePrice ?? undefined,
+    stock: raw.stock ?? 0,
+    badges,
+    frontImage: mapImage(raw.frontImage),
+    backImage: raw.backImage ? mapImage(raw.backImage) : mapImage(raw.frontImage),
+    galleryImages: raw.galleryImages?.map((image) => mapImage(image)),
+    ingredientIds: raw.ingredientIds,
   };
 }
 
-export function mapIngredient(
-  raw: CmsIngredient,
-  fallback: (typeof import("@/data/ingredients"))["ingredients"][number],
-) {
+export function mapIngredient(raw: CmsIngredient): Ingredient {
   return {
-    id: raw.id ?? fallback.id,
-    name: raw.name ?? fallback.name,
-    region: raw.region ?? fallback.region,
-    description: raw.description ?? fallback.description,
-    image: mapImage(raw.image, fallback.image),
-    toneClass: raw.toneClass ?? fallback.toneClass,
+    id: raw.id,
+    name: raw.name,
+    region: raw.region,
+    description: raw.description,
+    image: mapImage(raw.image),
+    toneClass: raw.toneClass,
   };
 }
 
-export function mapCertification(
-  raw: CmsCertification,
-  fallback: (typeof import("@/data/certifications"))["certifications"][number],
-) {
+export function mapCertification(raw: CmsCertification): Certification {
   return {
-    id: raw.id ?? fallback.id,
-    name: raw.name ?? fallback.name,
-    organization: raw.organization ?? fallback.organization,
-    description: raw.description ?? fallback.description,
-    logo: raw.logo ?? fallback.logo,
+    id: raw.id,
+    name: raw.name,
+    organization: raw.organization,
+    description: raw.description,
+    logo: raw.logo,
   };
 }
 
-export function mapArticle(raw: CmsArticle, fallback: (typeof import("@/data/articles"))["articles"][number]) {
+export function mapArticle(raw: CmsArticle): Article {
   return {
-    id: raw.id ?? fallback.id,
-    slug: raw.slug ?? fallback.slug,
-    title: raw.title ?? fallback.title,
-    excerpt: raw.excerpt ?? fallback.excerpt,
-    category: raw.category ?? fallback.category,
-    publishedAt: raw.publishedAt ?? fallback.publishedAt,
-    readMinutes: raw.readMinutes ?? fallback.readMinutes,
-    thumbnail: mapImage(raw.thumbnail, fallback.thumbnail),
+    id: raw.id,
+    slug: raw.slug,
+    title: raw.title,
+    excerpt: raw.excerpt,
+    category: raw.category,
+    publishedAt: raw.publishedAt,
+    readMinutes: raw.readMinutes,
+    thumbnail: mapImage(raw.thumbnail),
   };
 }
 
-export function mapSocialPost(
-  raw: CmsSocialPost,
-  fallback: (typeof import("@/data/social"))["socialPosts"][number],
-) {
+export function mapSocialPost(raw: CmsSocialPost): SocialPost {
   return {
-    id: raw.id ?? fallback.id,
-    href: raw.href ?? fallback.href,
-    image: mapImage(raw.image, fallback.image),
-    caption: raw.caption ?? fallback.caption,
-    likes: raw.likes ?? fallback.likes,
-    comments: raw.comments ?? fallback.comments,
+    id: raw.id,
+    href: raw.href,
+    image: mapImage(raw.image),
+    caption: raw.caption,
+    likes: raw.likes,
+    comments: raw.comments,
+  };
+}
+
+export function mapFormatsCatalog(raw: CmsFormatsCatalog): FormatsCatalog {
+  return {
+    id: raw.id,
+    eyebrow: raw.eyebrow,
+    badge: raw.badge,
+    feature: {
+      title: raw.feature.title,
+      description: raw.feature.description,
+    },
+    highlights: raw.highlights.map((highlight) => ({
+      title: highlight.title,
+      description: highlight.description,
+    })),
+    cta: {
+      label: raw.cta.label,
+      href: raw.cta.href,
+      ariaLabel: raw.cta.ariaLabel,
+    },
+    enabled: raw.enabled,
+    sortOrder: raw.sortOrder,
+    createdAt: raw.createdAt,
+    updatedAt: raw.updatedAt,
   };
 }

@@ -147,7 +147,7 @@ export function HeroSlide({ slide, isActive, preload = false }: HeroSlideProps) 
               // mounted so keyboard users could otherwise reach a hidden CTA.
               tabIndex={isActive ? 0 : -1}
               aria-label={`${slide.ctaLabel}: ${slide.title}`}
-              className={cn(buttonStyles({ variant: "primary", size: "md" }), "group/cta")}
+              className={cn(buttonStyles({ variant: "primary", size: "md" }), "group/cta bg-[#056B39] hover:bg-[#045a30]")}
             >
               {slide.ctaLabel}
               <ArrowRight
@@ -174,7 +174,7 @@ export function HeroSlide({ slide, isActive, preload = false }: HeroSlideProps) 
             fetchPriority={preload ? "high" : undefined}
             sizes="(min-width: 1024px) 50vw, (min-width: 768px) 55vw, 100vw"
             className={cn(
-              "object-cover transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
+              "object-contain transition-transform duration-[1200ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none",
               isActive ? "scale-100" : "scale-[1.04]",
               lowEnd && "scale-100 transition-none",
             )}

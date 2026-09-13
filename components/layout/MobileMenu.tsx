@@ -6,9 +6,14 @@ import * as Dialog from "@radix-ui/react-dialog";
 import { X } from "lucide-react";
 import { cn } from "@/lib/cn";
 import { useUIStore } from "@/lib/store/useUIStore";
-import { headerSections } from "@/data/nav";
 import { Logo } from "@/components/ui/Logo";
 import { Button } from "@/components/ui/Button";
+import type { NavItem } from "@/types";
+
+type MobileMenuProps = {
+  brandName: string;
+  navItems: NavItem[];
+};
 
 /**
  * Mobile + tablet drawer ( < lg ).
@@ -17,7 +22,7 @@ import { Button } from "@/components/ui/Button";
  * and other triggers don't need to know each other. Radix handles focus trap,
  * scroll lock, ESC and ARIA — we only style + animate.
  */
-export function MobileMenu() {
+export function MobileMenu({ brandName, navItems }: MobileMenuProps) {
   const open = useUIStore((s) => s.isMobileMenuOpen);
   const close = useUIStore((s) => s.closeMobileMenu);
 
@@ -37,9 +42,10 @@ export function MobileMenu() {
           )}
         />
         <Dialog.Content
+          id="mobile-menu"
           aria-describedby={undefined}
           className={cn(
-            "fixed inset-y-0 right-0 z-50 flex h-dvh w-full max-w-md flex-col",
+            "fixed inset-y-0 right-0 z-100 flex h-dvh w-full max-w-md flex-col",
             "bg-cream-50 shadow-2xl outline-none lg:hidden",
             "data-[state=open]:animate-[slide-in-right_320ms_var(--ease-soft)]",
             "data-[state=closed]:animate-[slide-out-right_240ms_var(--ease-soft)]",
@@ -47,8 +53,8 @@ export function MobileMenu() {
         >
           <Dialog.Title className="sr-only">Menu di động</Dialog.Title>
 
-          <div className="flex h-16 shrink-0 items-center justify-between border-b border-line-100 px-5">
-            <Logo />
+          <div className="flex h-[90px] shrink-0 items-center justify-between border-b border-line-100 px-5">
+            <Logo brandName={brandName} />
             <Dialog.Close
               aria-label="Đóng menu"
               className={cn(
@@ -66,7 +72,7 @@ export function MobileMenu() {
             className="flex-1 overflow-y-auto px-5 py-4"
           >
             <div className="flex flex-col">
-              {headerSections.map((item) => (
+              {navItems.map((item) => (
                 <MobileMenuLink key={item.href} item={item} onNavigate={close} />
               ))}
             </div>
@@ -77,7 +83,7 @@ export function MobileMenu() {
               Yêu cầu báo giá
             </Button>
             <p className="mt-3 text-center text-xs text-ink-500">
-              Hotline 1900 8688 — phản hồi báo giá trong 24h
+              Hotline 0398829946 — phản hồi báo giá trong 24h
             </p>
           </div>
         </Dialog.Content>
@@ -89,15 +95,34 @@ export function MobileMenu() {
 /* ---------------------------------- parts --------------------------------- */
 
 type MobileMenuItemProps = {
-  item: (typeof headerSections)[number];
+  item: NavItem;
   onNavigate: () => void;
 };
 
 function MobileMenuLink({ item, onNavigate }: MobileMenuItemProps) {
+  const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    onNavigate();
+
+    const hashIndex = item.href.indexOf("#");
+    if (hashIndex === -1) return;
+
+    if (window.location.pathname !== "/") return;
+
+    const targetId = item.href.slice(hashIndex + 1);
+    if (!targetId) return;
+
+    const target = document.getElementById(targetId);
+    if (!target) return;
+
+    event.preventDefault();
+    history.replaceState(null, "", `#${targetId}`);
+    target.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
+
   return (
     <Link
       href={item.href}
-      onClick={onNavigate}
+      onClick={handleClick}
       className={cn(
         "border-b border-line-100/70 py-4 text-base font-medium",
         "text-ink-900 transition-colors hover:text-moss-700",

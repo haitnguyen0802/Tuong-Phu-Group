@@ -93,12 +93,87 @@ export type Brand = {
   name: string;
   tagline: string;
   description: string;
-  socials: { label: string; href: string; icon: "instagram" | "facebook" | "tiktok" | "youtube" }[];
+  socials: FooterSocial[];
   contact: {
     hotline: string;
     email: string;
     address: string;
   };
+};
+
+export type FooterLogo = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+};
+
+export type FooterSocial = {
+  label: string;
+  href: string;
+  icon: "facebook" | "instagram" | "tiktok" | "youtube" | string;
+};
+
+export type FooterData = {
+  name: string;
+  logo: FooterLogo | null;
+  description: string;
+  contact: {
+    hotline: string;
+    hotline1: string;
+    hotline2: string;
+    email: string;
+    /** Email thứ 2 — API chưa trả về nên FE dùng giá trị mặc định khi thiếu. */
+    email2?: string;
+    address: string;
+  };
+  socials: FooterSocial[];
+  footerCopyright: string;
+};
+
+export type FormatsCatalogHighlight = {
+  title: string;
+  description: string;
+};
+
+export type FormatsCatalogFeature = {
+  title: string;
+  description: string;
+};
+
+export type FormatsCatalogCta = {
+  label: string;
+  href: string;
+  ariaLabel: string;
+};
+
+export type FormatsCatalog = {
+  id: string;
+  eyebrow: string;
+  badge: string;
+  feature: FormatsCatalogFeature;
+  highlights: FormatsCatalogHighlight[];
+  cta: FormatsCatalogCta;
+  enabled: boolean;
+  sortOrder: number;
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type SectionKey = "featured" | "formats" | "partners" | "newsletter";
+export type SectionAlign = "center" | "left";
+
+export type SectionHeading = {
+  id: string;
+  sectionKey: SectionKey;
+  eyebrow: string | null;
+  title: string;
+  lead: string | null;
+  align: SectionAlign;
+  enabled: boolean;
+  sortOrder: number;
+  createdAt: string;
+  updatedAt: string;
 };
 
 export type CartItem = {

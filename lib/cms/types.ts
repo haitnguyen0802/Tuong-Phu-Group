@@ -1,7 +1,9 @@
+import type { SectionHeadingsMap } from "@/lib/api/sectionHeadings";
 import type {
   Article,
   CampaignSlide,
   Certification,
+  FormatsCatalog,
   ImageAsset,
   Ingredient,
   Product,
@@ -12,6 +14,7 @@ import type { z } from "zod";
 import type {
   cmsArticleSchema,
   cmsCertificationSchema,
+  cmsFormatsCatalogSchema,
   cmsHomepageSchema,
   cmsImageSchema,
   cmsIngredientSchema,
@@ -29,6 +32,7 @@ export type CmsCertification = z.infer<typeof cmsCertificationSchema>;
 export type CmsArticle = z.infer<typeof cmsArticleSchema>;
 export type CmsSocialPost = z.infer<typeof cmsSocialPostSchema>;
 export type CmsSocialMeta = z.infer<typeof cmsSocialMetaSchema>;
+export type CmsFormatsCatalog = z.infer<typeof cmsFormatsCatalogSchema>;
 export type CmsHomepageResponse = z.infer<typeof cmsHomepageSchema>;
 
 export type HomepageData = {
@@ -38,9 +42,10 @@ export type HomepageData = {
   certifications: Certification[];
   articles: Article[];
   socialPosts: SocialPost[];
-  socialHandle: string;
-  socialProfileHref: string;
-  source: "cms" | "fallback" | "mixed";
+  socialHandle: string | null;
+  socialProfileHref: string | null;
+  sectionHeadings: SectionHeadingsMap;
+  formatsCatalog: FormatsCatalog | null;
 };
 
 export type MapperContext = {

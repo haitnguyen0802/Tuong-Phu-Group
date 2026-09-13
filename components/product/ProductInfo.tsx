@@ -47,7 +47,7 @@ export function ProductInfo({ product, ingredientSummary }: ProductInfoProps) {
       </p>
 
       <div className="space-y-2">
-        <p className="text-sm font-medium text-ink-800">Loại hình OOH áp dụng</p>
+        <p className="text-sm font-medium text-ink-800">Các hạng mục OOH áp dụng</p>
         <ul className="flex flex-wrap gap-2">
           {ingredientSummary.map((name) => (
             <li

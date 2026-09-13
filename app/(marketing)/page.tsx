@@ -1,37 +1,21 @@
 import type { Metadata } from "next";
-import { HeroCarousel } from "@/components/home/HeroCarousel";
-import { CertificationSection } from "@/components/home/CertificationSection";
-import { BestSellerProductGrid } from "@/components/home/BestSellerProductGrid";
-import { IngredientStorySection } from "@/components/home/IngredientStorySection";
-import { SocialProofSection } from "@/components/home/SocialProofSection";
-import { NewsLinksSection } from "@/components/home/NewsLinksSection";
-import { NewsletterSection } from "@/components/home/NewsletterSection";
+import { HomePageContent } from "@/components/home/HomePageContent";
 import { getHomepageData } from "@/lib/cms/get-homepage-data";
+import { isMaintenanceMode } from "@/lib/maintenance";
 
 export const metadata: Metadata = {
-  title: "Trang chu",
+  title: "Trang chủ",
   description:
-    "Tuong Phu Group — Giai phap quang cao OOH toan dien: bang LED, billboard cao toc, frame va decal thang may, banner thang cuon, atrium TTTM, cong cho va in bat kho lon tren toan quoc.",
+    "Tường Phú — Giải pháp quảng cáo OOH toàn diện: bảng LED, billboard cao tốc, frame và decal thang máy, banner thang cuộn, atrium TTTM, cửa chớp và in bảng lớn trên toàn quốc.",
 };
 
-export const revalidate = 300;
-
 export default async function HomePage() {
+  // Chế độ bảo trì: root layout đã hiển thị trang bảo trì, bỏ qua fetch dữ liệu.
+  if (isMaintenanceMode()) {
+    return null;
+  }
+
   const homepageData = await getHomepageData();
 
-  return (
-    <>
-      <HeroCarousel slides={homepageData.slides} />
-      <CertificationSection items={homepageData.certifications} />
-      <BestSellerProductGrid products={homepageData.products} />
-      <IngredientStorySection items={homepageData.ingredients} />
-      <SocialProofSection
-        posts={homepageData.socialPosts}
-        handle={homepageData.socialHandle}
-        profileHref={homepageData.socialProfileHref}
-      />
-      <NewsLinksSection items={homepageData.articles} />
-      <NewsletterSection />
-    </>
-  );
+  return <HomePageContent initialData={homepageData} />;
 }
